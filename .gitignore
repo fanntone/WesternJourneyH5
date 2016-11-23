@@ -33,5 +33,5 @@ proguard/
 .gradle/
 build/
 bin/
-.metadata/*
-RemoteSystemsTempFiles/*
+.metadata
+RemoteSystemsTempFiles
