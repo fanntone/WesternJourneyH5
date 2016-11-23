@@ -28,17 +28,17 @@ import com.jinglei.jedis.RedisManager;
  * </p>
  *
  * <p>
- * 		Description: Game Server 主類別.
+ * 		Description: Game Server 銝駁�.
  * </p>
  * 
  * <p>
  * 		Bief introduction:
  * 			@see com.jinglei.server.event.EventTypes
  * 				EventTypes :
- * 							CHANNEL_ACTIVE,  		//Channel 被啟動的時候...
- * 							CHANNEL_INACTIVE,		//Channel Channel 失效的時候...
- * 							CHANNEL_REGISTERED,		//Channel 被註冊的時候...		連線成功  註冊到channelMap 裏時
- * 							CHANNEL_UNREGISTERED,	//Channel 移除註冊的時候...		連線斷     成功移除channelMap 裏時
+ * 							CHANNEL_ACTIVE,  		//Channel 鋡怠������...
+ * 							CHANNEL_INACTIVE,		//Channel Channel 憭望�����...
+ * 							CHANNEL_REGISTERED,		//Channel 鋡怨酉������...		��蝺���  閮餃�channelMap 鋆��
+ * 							CHANNEL_UNREGISTERED,	//Channel 蝘駁閮餃�����...		��蝺     ���宏�channelMap 鋆��
  * </p>
  *
  * <p>
@@ -58,7 +58,7 @@ public class GameServerStarter
 	
 	private static final String LOGIC_TYPE_CONFIG = "logic_type_def";
 	
-	public static ResourceBundle  configuration = null;		//Server 相關設定
+	public static ResourceBundle  configuration = null;		//Server ���身摰�
 	private static final String SERVER_CONFIGURATION   		= "configuration";
 	
 	private static ServerPlugin sp = null;
@@ -83,32 +83,32 @@ public class GameServerStarter
 				}
 				
 				/*
-				 *	初始 Gashapon Manage 
+				 *	���� Gashapon Manage 
 				 */
-				//InitGeoipManage();
+				/*InitGeoipManage();*/
 				
 				/*
-				 * 初始 Redis Manage
+				 * ���� Redis Manage
 				 */	
-					InitRedisManage();	
+					/*InitRedisManage();*/	
 					
 				/*
-				 * 初始  Hibernate Management
+				 * ����  Hibernate Management
 				 */
 					InitHibernateManagement();
 					
 				/*
-				 *  初始 SettingManage
+				 *  ���� SettingManage
 				 */
 					//InitSettingManage();
 					
 				/*
-				 *  初始 ServiceManager
+				 *  ���� ServiceManager
 				 */
 					InitServiceManager();	
 					
 				/*
-				 * 初始 Actor Manage
+				 * ���� Actor Manage
 				 */
 					InitActorManage();
 				
@@ -119,7 +119,7 @@ public class GameServerStarter
 					break _SERVER_ERROR_;
 				}
 				
-				//測試用
+				//皜祈岫�
 
 				rbLogicType = ResourceBundle.getBundle(GameServerStarter.LOGIC_TYPE_CONFIG);					
 					
@@ -129,7 +129,7 @@ public class GameServerStarter
 				};
 				
 				/*
-				 * 沒有處理邏輯  先行注解
+				 * 瘝����摩  ���釣閫�
 				 */					
 				if ( !sp.addLogic("com.jinglei.game.server.logic", rbLogicType)) {
 					strError = "[Failure] Server Plugin addLogic by ResourceBundle... Failure!!";
@@ -138,17 +138,17 @@ public class GameServerStarter
 			
 				try
 				{						
-					// Listener  Channel 被註冊的時候...		連線成功  註冊到channelMap 裏時
+					// Listener  Channel 鋡怨酉������...		��蝺���  閮餃�channelMap 鋆��
 					sp.addListener(EventTypes.CHANNEL_REGISTERED, new EventListener[]{ 
 						new ChannelRegistered(),
 					});
 								
-					// Listener Channel Channel 失效的時候...	連線斷了
+					// Listener Channel Channel 憭望�����...	��蝺鈭�
 					sp.addListener(EventTypes.CHANNEL_INACTIVE, new EventListener[]{ 
 						new ChannelInactive(),
 					});
 					
-					// Listener Channel Channel 讀取資料成功
+					// Listener Channel Channel 霈��������
 					//TODO:  add back the read complete.
 					
 					sp.addListener(EventTypes.CHANNEL_READ_COMPLETE, new EventListener[]{ 
@@ -186,7 +186,7 @@ public class GameServerStarter
 						}
 					}
 					
-					SysLog.PrintWarring("[Success] Server Start 成功 ......Success!!");
+					SysLog.PrintWarring("[Success] Server Start ���� ......Success!!");
 					return;
 				}
 				catch (Exception e)
@@ -203,8 +203,8 @@ public class GameServerStarter
 			}
 
 		}
-		//_SERVER_ERROR_ 處理
-		SysLog.PrintWarring("[Failure] Server Start 失敗 ...Error:"+strError+" ...Failure!!");
+		//_SERVER_ERROR_ ����
+		SysLog.PrintWarring("[Failure] Server Start 憭望�� ...Error:"+strError+" ...Failure!!");
 	}
 
 	private static int getPort(String[] args) throws UnknownHostException
@@ -223,7 +223,7 @@ public class GameServerStarter
 
 		default:			
 			SysLog.PrintError("Too many Arguments.");
-			SysLog.PrintError("[Help]\nport\t\t指定port");
+			SysLog.PrintError("[Help]\nport\t\t���ort");
 			throw new IllegalArgumentException();
 		}
 
@@ -233,7 +233,7 @@ public class GameServerStarter
 	}	
 	
 	/*
-	 *  初始 SettingManager()
+	 *  ���� SettingManager()
 	 */
 	public static void InitSettingManage() {
 		SysLog.PrintDebug("[Init].[Begin] SettingManage !!!");
@@ -249,7 +249,7 @@ public class GameServerStarter
 	}	
 
 	/*
-	 * 取得 ResourceBundle
+	 * ���� ResourceBundle
 	 */
 	public static ResourceBundle getResourceBundle() {
 		if ( GameServerStarter.configuration != null ) {
@@ -260,7 +260,7 @@ public class GameServerStarter
 	}
 	
 	/*
-	 *  初始  ActorManage  
+	 *  ����  ActorManage  
 	 */
 	public static void InitActorManage()  {
 		SysLog.PrintDebug("[Init].[Begin] ActorManage !!!");
@@ -278,7 +278,7 @@ public class GameServerStarter
 	}
 	
 	/*
-	 * 初始暫存 Redis Manage
+	 * ���摮� Redis Manage
 	 */
 	public static void InitRedisManage() {
 		SysLog.PrintDebug("[Init].[Begin] RedisManager !!!");
@@ -287,8 +287,8 @@ public class GameServerStarter
 	}
 	
 	/*
-	 *  初始   HibernateManagement  
-	 *  資料  OR-M Management
+	 *  ����   HibernateManagement  
+	 *  鞈��  OR-M Management
 	 */
 	public static void InitHibernateManagement()  {
 		SysLog.PrintDebug("[Init].[Begin] HibernateManagement !!!");
