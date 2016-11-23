@@ -43,7 +43,7 @@ public class Table implements JSONBean {
 		return BetRange;
 	}
 	
-	public void    setBetRange(Integer range) {
+	public void  setBetRange(Integer range) {
 		this.BetRange = range;
 	}	
 	
