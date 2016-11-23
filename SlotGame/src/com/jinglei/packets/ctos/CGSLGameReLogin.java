@@ -24,11 +24,11 @@ public class CGSLGameReLogin implements JSONBean {
 	public CGSLGameReLogin() {
 	}
 	
-	public int GameType_;
-	public int SeatNo_;
-	public int  nPoints_;
-	public String CardName_;
-	public String NickName_;
+	private int GameType_;
+	private int SeatNo_;
+	private int  nPoints_;
+	private String CardName_;
+	private String NickName_;
 	
 	public int getGameType() {
 		return this.GameType_;
@@ -60,5 +60,13 @@ public class CGSLGameReLogin implements JSONBean {
 	
 	public void setCardName(String card_name) {
 		this.CardName_ = card_name;
+	}
+	
+	public String getNickName_() {
+		return this.NickName_;
+	}
+	
+	public void setNickName_(String nick_name) {
+		this.NickName_ = nick_name;
 	}
 }
