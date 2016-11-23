@@ -14,7 +14,7 @@ public class FannTest implements JSONBean {
 		return new String("FannTest");
 	}
 	
-	Integer   BetMax = 0;
+	public Integer   BetMax = 1;
 	
 	public Integer getBetMax() {
 		return BetMax;
@@ -24,7 +24,7 @@ public class FannTest implements JSONBean {
 		this.BetMax = max;
 	}
 	
-	Integer   BetMin = 0;
+	public Integer   BetMin = 1;
 	
 	public Integer getBetMin() {
 		return BetMin;
