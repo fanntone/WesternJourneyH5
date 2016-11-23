@@ -22,11 +22,11 @@ public class CGSLGameReLogin implements JSONBean {
 	public CGSLGameReLogin() {
 	}
 	
-	private int GameType_;
-	private int SeatNo_;
-	private int  nPoints_;
-	private String CardName_;
-	private String NickName_;
+	private int GameType_ = 0;
+	private int SeatNo_ = 0;
+	private int nPoints_ = 0;
+	private String CardName_ = "";
+	private String NickName_ = "";
 	
 	public int getGameType() {
 		return this.GameType_;

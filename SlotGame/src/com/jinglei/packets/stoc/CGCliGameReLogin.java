@@ -12,14 +12,14 @@ public class CGCliGameReLogin implements JSONBean {
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return new String("CGCliGameReLogin");
 	}
 	
 	public CGCliGameReLogin() {
 		
 	}
 	
-	private int State_;
+	private int State_ = 0;
 	
 	public int getState() {
 		return this.State_;
