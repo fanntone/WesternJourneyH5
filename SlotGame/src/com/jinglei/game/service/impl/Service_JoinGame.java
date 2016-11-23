@@ -59,21 +59,21 @@ public class Service_JoinGame extends Service {
 				boolean[] check_bool = { false };
 				int[]     check_code = { 0 };
 				
-				Integer   				channel_hashcode  = get(ServiceKeys.CHANNEL_HASH_CODE,check_bool);
+				Integer	channel_hashcode = get(ServiceKeys.CHANNEL_HASH_CODE,check_bool);
 				
 				if ( channel_hashcode == null || !check_bool[0]) {
 					SysLog.PrintError(String.format("[Service:%s] Channel Hashcode is NULL....!!",getServiceName()));
 					break _SERVICE_ERROR_;					
 				}
 				
-				NettyClientChannel 	player_channel 	  = ActorManage.getChannel(channel_hashcode, false);
+				NettyClientChannel  player_channel 	  = ActorManage.getChannel(channel_hashcode, false);
 				
 				if (player_channel == null ) {
 					SysLog.PrintError(String.format("[Service:%s] Channel Hashcode:%d Player Channel is NULL....!!",getServiceName(),channel_hashcode));
 					break _SERVICE_ERROR_;
 				}			
 				
-				String					json_strings	  = get(ServiceKeys.JSON_STRINGS,check_bool);
+				String	json_strings = get(ServiceKeys.JSON_STRINGS,check_bool);
 				
 				if ( json_strings == null || json_strings.isEmpty() ||	!check_bool[0]) {
 					SysLog.PrintError(String.format("[Service:%s] JSON Strings  is Error....Failure!!",getServiceName()));
