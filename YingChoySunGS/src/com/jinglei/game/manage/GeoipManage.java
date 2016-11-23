@@ -55,6 +55,7 @@ public class GeoipManage {
 				filePatch = dir + sep + "GeoIP.dat";
 			}
 			
+			SysLog.PrintError(String.format("[GeoipManage] FilePatch:【%s】....Success!!",filePatch));
 			lookupService = new LookupService(filePatch,LookupService.GEOIP_MEMORY_CACHE);
 		} 
 		catch (IOException e) {

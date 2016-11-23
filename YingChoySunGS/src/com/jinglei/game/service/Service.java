@@ -84,7 +84,7 @@ public abstract class Service {
 	 *			拋出：
 	 *				IllegalArgumentException - 如果初始容量為負，或者加載因子或concurrencyLevel 為非正。
 	 */
-	private ConcurrentHashMapV8<String, Object> mapAttachment = new ConcurrentHashMapV8<String, Object>(64);
+	private ConcurrentHashMapV8<String, Object> mapAttachment = new ConcurrentHashMapV8<String, Object>(32);
 	
 	/******************************************************************************
 	 * 可以針對同一個 Service 放入 Attachment.

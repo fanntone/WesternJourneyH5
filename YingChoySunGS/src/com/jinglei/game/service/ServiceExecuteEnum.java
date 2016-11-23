@@ -5,6 +5,10 @@ public enum ServiceExecuteEnum {
 	 * Service
 	 */
 	/*
+	 * JoinGame
+	 */
+	SEE_JoinGame(1001,"com.jinglei.game.service.impl.Service_JoinGame"),
+	/*
 	 * Game Memory Catch Data
 	 */
 	SEE_PlayerGameCatchMemory(201,"com.auer.game.service.impl.Service_PlayerGameCatchMemory"),

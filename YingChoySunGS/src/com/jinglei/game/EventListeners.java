@@ -6,6 +6,7 @@ import com.jinglei.game.attribute.impl.GClonePlayer;
 //import com.jinglei.game.attribute.impl.GClonePlayer;
 
 import com.jinglei.channel.NettyClientChannel;
+import com.jinglei.game.manage.ActorManage;
 import com.jinglei.game.manage.UtilTimeManage;
 
 //import com.jinglei.game.service.Service;
@@ -23,8 +24,9 @@ class ChannelRegistered implements EventListener
 	public void notify(NettyClientChannel channel)
 	{ 
 		try	{
-			SysLog.PrintInfo("[EventListener.java]  Channel Registered - ChannelRegistered");
-			channel.ClearKeyMap();
+			SysLog.PrintError(String.format("[ChannelRegistered] Channel Hash Code:%d ...Registered!!",channel.getHashCode()));
+			channel.ClearKeyMap();			
+			ActorManage.addChannel(channel);
 		}
 		catch(Exception e)	{
 			e.printStackTrace();
@@ -41,6 +43,7 @@ class ChannelInactive implements EventListener
 	public void notify(NettyClientChannel channel)
 	{ 
 		try {
+			SysLog.PrintDebug(String.format("[ChannelInactive] Channel Hash Code:%d ...Inactive!!",channel.getHashCode()));
 			int[] check_code = { 0 };
 			int iNactivePlayerID = 0;
 			int  room_id = 0;
@@ -77,6 +80,7 @@ class ChannelReadComplete implements EventListener
 	public void notify(NettyClientChannel channel)
 	{ 
 		try {
+			SysLog.PrintError(String.format("[ChannelReadComplete] Channel Hash Code:%d ...ReadComplete!!",channel.getHashCode()));
 			if ( channel.ContainsKey(ActorKeys.CLONE_PLAYER)) {
 				GClonePlayer  player = channel.get(ActorKeys.CLONE_PLAYER);
 				if ( player != null ) {

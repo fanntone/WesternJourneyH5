@@ -10,9 +10,19 @@ public class ServiceKeys {
 	public  static  final String  CHANNEL = "CHANNEL";
 	
 	/*
+	 *  連線的  CHANNEL Hash Code
+	 */
+	public  static  final String  CHANNEL_HASH_CODE = "CHANNEL_HASH_CODE";
+	
+	/*
 	 *  封包資料
 	 */
 	public  static  final String  PACKET_DATA = "PACKET_DATA";
+	
+	/*
+	 *  封包資料
+	 */
+	public  static  final String  JSON_STRINGS = "JSON_STRINGS";
 	
 	/*
 	 *  玩家  Clone Player

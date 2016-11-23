@@ -27,9 +27,9 @@ public class ActorKeys {
 	
 	
 	/*
-	 * 房間名稱
+	 * Account Data 
 	 */
-	public static  final String ROOM_NAME = "ROOM_NAME";
+	public static  final String ACCOUNT_DATA = "ACCOUNT_DATA";
 	
 	/*
 	 * 玩家國家

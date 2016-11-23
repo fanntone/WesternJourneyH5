@@ -1,9 +1,9 @@
 package com.jinglei.game.service;
 
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import com.jinglei.game.DevelopmentVersion;
 import com.jinglei.game.SysLog;
@@ -52,24 +52,30 @@ public class ServiceManage {
 	/*
 	 * 儲存要處理 Service
 	 */
-	private static ConcurrentHashMap<Long,Service> serviceMap = new ConcurrentHashMap<Long,Service>();
+	private static LinkedBlockingQueue<Service> serviceQueue = new LinkedBlockingQueue<Service>();
 	
 	/*
 	 *  增加新的要處理 Service
 	 */
-	public static synchronized boolean addService(Long excDate,Service service) {
-		synchronized (ServiceManage.serviceMap) {
-			if ( ServiceManage.serviceMap != null && service != null) {
-				if (!ServiceManage.serviceMap.containsKey(excDate)) {
-					ServiceManage.serviceMap.put(excDate, service);
+	public static synchronized boolean addService(Service service) {
+		//synchronized (ServiceManage.serviceMap) {
+			try {
+				if ( ServiceManage.serviceQueue != null && service != null) {
+					ServiceManage.serviceQueue.put(service);
+					return true;
 				}
-				else {
-					long newExc = excDate + new Random().nextInt(1000);
-					ServiceManage.serviceMap.put(newExc, service);
-				}
-				return true;
+			} 
+			catch (InterruptedException e) {
+				e.printStackTrace();
+				SysLog.PrintError(String.format("[Manage:%s] unknow exception in addService(Service service) Error:〔%s...Exception!!!", ServiceManage.getManageName(),e.getMessage()));
+
+				return false;				
 			}
-		}
+			finally {
+	
+	        }
+		//}
+
 		
 		return false;
 	}	
@@ -80,29 +86,23 @@ public class ServiceManage {
 	 */
 	//public static synchronized Service getService() {
 	public static  Service getService() {		
-		Long  checkDate = (long)0;
-		synchronized (ServiceManage.serviceMap) {
-			if ( DevelopmentVersion.VERSION_LOCALE_TAIWAN_TIME) {
-				checkDate = UtilTimeManage.getTaiwanCurrentTimeToService();
-				if ( !ServiceManage.serviceMap.isEmpty() ) {
-					for ( Long excDate : ServiceManage.serviceMap.keySet()) {
-						if ( excDate <= checkDate ) {
-							return ServiceManage.serviceMap.remove(excDate);
-						}					
-					}
+
+		//synchronized (ServiceManage.serviceMap) {
+			try {
+				if ( !ServiceManage.serviceQueue.isEmpty()) {
+					return ServiceManage.serviceQueue.take();
 				}
-			}	
-			else {
-				checkDate = UtilTimeManage.getCurrentTimeToService();
-				if ( !ServiceManage.serviceMap.isEmpty() ) {
-					for ( Long excDate : ServiceManage.serviceMap.keySet()) {
-						if ( excDate <= checkDate ) {
-							return ServiceManage.serviceMap.remove(excDate);
-						}					
-					}
-				}
+			} 
+			catch (InterruptedException e) {
+				e.printStackTrace();
+				SysLog.PrintError(String.format("[Manage:%s] unknow exception in addService(Service service) Error:〔%s...Exception!!!", ServiceManage.getManageName(),e.getMessage()));
+	
+				return null;				
 			}
-		}		
+			finally {
+	
+	        }			
+		//}		
 
 		return null;
 	}	
@@ -111,7 +111,7 @@ public class ServiceManage {
 	 * 取得  Queue 中 待處理 Service 數量
 	 */
 	public static synchronized int getServiceSize() {
-		return ServiceManage.serviceMap.size();
+		return ServiceManage.serviceQueue.size();
 	}
 	
 	/*
@@ -129,16 +129,16 @@ public class ServiceManage {
 				return rtnService;			
 			}
 			else {
-				SysLog.PrintError("["+getManageName()+"] Server Type: " + service.getType()+" Class Path:"+service.getClassPath()+",Service is NULL ,麻煩查明 Service Class/newInstance() 未被實作....Failure!!!");
+				SysLog.PrintError(String.format("[Manage:%s] Server Type:〔%d〕  Class Path:【%s】 ,Service is NULL ,麻煩查明 Service Class/newInstance() 未被實作....Failure!!!", ServiceManage.getManageName(),service.getType(),service.getClassPath()));
 			}
 			
 			return null;
 		}
 		catch (Exception e)
 		{
-			rtnService = null;
-			SysLog.PrintException("["+getManageName()+"] unknow exception in getServiceObject: "+ e.getMessage() +"");
 			e.printStackTrace();
+			rtnService = null;
+			SysLog.PrintException(String.format("[Manage:%s] unknow exception in addService(Service service) Error:〔%s...Exception!!!", ServiceManage.getManageName(),e.getMessage()));			
 		}
 		finally
 		{
@@ -157,8 +157,7 @@ public class ServiceManage {
 		check_code[0] = 0;
 		Service rtnService = null;
 		
-		try {
-			
+		try {			
 			for (ServiceExecuteEnum func : ServiceExecuteEnum.values()) {
 				if ( func.getType() == service_type) {
 					check_code[0] = 1;
@@ -171,8 +170,8 @@ public class ServiceManage {
 				check_code[0] = 1;
 				return rtnService;			
 			}
-			else {
-				SysLog.PrintError("["+getManageName()+"] Server Type: " + service_type+" ,Service is NULL ,麻煩查明 Service Class/newInstance() 未被實作....Failure!!!");
+			else {				
+				SysLog.PrintError(String.format("[Manage:%s] Server Type:〔%d〕   ,Service is NULL ,麻煩查明 Service Class/newInstance() 未被實作....Failure!!!", ServiceManage.getManageName(),service_type));
 			}
 			
 			return null;
@@ -278,7 +277,7 @@ public class ServiceManage {
 							 *   Thread Sleep
 							 */
 							++nCount;					
-							if ( nCount >= 8) {
+							if ( nCount >= 10) {
 								/*
 								 * 1秒=1000毫秒=1000000微秒=1000000000奈秒
 								 * 毫(m)=10的-3次方=0.001

@@ -4,7 +4,7 @@ import java.net.InetSocketAddress;
 
 import com.alibaba.fastjson.JSON;
 import com.jinglei.game.DevelopmentVersion;
-import com.jinglei.game.YingChoySunGS;
+import com.jinglei.game.GameServerStarter;
 import com.jinglei.game.SysLog;
 
 import redis.clients.jedis.Jedis;
@@ -117,11 +117,11 @@ public class RedisManager {
 		  try {
 			  // Create and set a JedisPoolConfig
 			  config = new JedisPoolConfig();
-			  config.setMaxTotal(Integer.parseInt(YingChoySunGS.getResourceBundle().getString("REDIS_SET_MAX_TOTAL")));
-			  config.setMaxIdle(Integer.parseInt(YingChoySunGS.getResourceBundle().getString("REDIS_SET_MAX_IDLE")));
-			  config.setMaxWaitMillis(Integer.parseInt(YingChoySunGS.getResourceBundle().getString("REDIS_SET_WAIT_MILLIS")));			  
-			  config.setTestOnBorrow(Boolean.parseBoolean(YingChoySunGS.getResourceBundle().getString("REDIS_TEST_ON_BORROW")));
-			  config.setTestOnReturn(Boolean.parseBoolean(YingChoySunGS.getResourceBundle().getString("REDIS_TEST_ON_RETURN")));
+			  config.setMaxTotal(Integer.parseInt(GameServerStarter.getResourceBundle().getString("REDIS_SET_MAX_TOTAL")));
+			  config.setMaxIdle(Integer.parseInt(GameServerStarter.getResourceBundle().getString("REDIS_SET_MAX_IDLE")));
+			  config.setMaxWaitMillis(Integer.parseInt(GameServerStarter.getResourceBundle().getString("REDIS_SET_WAIT_MILLIS")));			  
+			  config.setTestOnBorrow(Boolean.parseBoolean(GameServerStarter.getResourceBundle().getString("REDIS_TEST_ON_BORROW")));
+			  config.setTestOnReturn(Boolean.parseBoolean(GameServerStarter.getResourceBundle().getString("REDIS_TEST_ON_RETURN")));
 		  }		  
 		  catch(Exception e) {
 				e.printStackTrace();
@@ -140,14 +140,14 @@ public class RedisManager {
 	  public final static boolean initJedisPools() {
 		  try {			  
 			  	if (DevelopmentVersion.VERSION_PRESSURE_TEST) {
-			  		redis_service_ip   		= YingChoySunGS.getResourceBundle().getString("Game_Redis_IP");	
-			  		redis_service_port 		= Integer.parseInt(YingChoySunGS.getResourceBundle().getString("Game_Redis_Port"));
-			  		redis_service_timeout   = Integer.parseInt(YingChoySunGS.getResourceBundle().getString("Game_Redis_TimeOut"));
+			  		redis_service_ip   		= GameServerStarter.getResourceBundle().getString("Game_Redis_IP");	
+			  		redis_service_port 		= Integer.parseInt(GameServerStarter.getResourceBundle().getString("Game_Redis_Port"));
+			  		redis_service_timeout   = Integer.parseInt(GameServerStarter.getResourceBundle().getString("Game_Redis_TimeOut"));
 				}				
 				else {
-			  		redis_service_ip   		= YingChoySunGS.getResourceBundle().getString("Game_Redis_IP");	
-			  		redis_service_port 		= Integer.parseInt(YingChoySunGS.getResourceBundle().getString("Game_Redis_Port"));
-			  		redis_service_timeout   = Integer.parseInt(YingChoySunGS.getResourceBundle().getString("Game_Redis_TimeOut"));
+			  		redis_service_ip   		= GameServerStarter.getResourceBundle().getString("Game_Redis_IP");	
+			  		redis_service_port 		= Integer.parseInt(GameServerStarter.getResourceBundle().getString("Game_Redis_Port"));
+			  		redis_service_timeout   = Integer.parseInt(GameServerStarter.getResourceBundle().getString("Game_Redis_TimeOut"));
 				}
 			  	
 			  	SysLog.PrintError("[Checking].[" + getManageName() + "] redis_service_ip:"+redis_service_ip+" ,redis_service_port:"+redis_service_port+" ,redis_service_timeout:"+redis_service_timeout);

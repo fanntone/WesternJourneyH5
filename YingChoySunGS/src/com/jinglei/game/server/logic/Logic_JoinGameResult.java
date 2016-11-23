@@ -5,6 +5,12 @@ import java.nio.charset.StandardCharsets;
 import com.alibaba.fastjson.JSON;
 import com.jinglei.channel.NettyClientChannel;
 import com.jinglei.game.SysLog;
+import com.jinglei.game.manage.ActorManage;
+import com.jinglei.game.manage.UtilTimeManage;
+import com.jinglei.game.service.Service;
+import com.jinglei.game.service.ServiceExecuteEnum;
+import com.jinglei.game.service.ServiceKeys;
+import com.jinglei.game.service.ServiceManage;
 import com.jinglei.packets.ctos.Guess;
 import com.jinglei.packets.ctos.JoinGame;
 import com.jinglei.packets.stoc.GuessResult;
@@ -60,23 +66,28 @@ public class Logic_JoinGameResult implements CommonLogic {
 	@Override
 	public void executeLogic(byte[] packet_data, NettyClientChannel channel) {
 		try {
-			SysLog.PrintError("Logic_JoinGameResult Run !!");
+			SysLog.PrintError(String.format("[Logic:%s]  Run Date:%d  Channel HashCode:%d Runing Begin...!!!", getLogicName(),UtilTimeManage.getCurrentTimeToNumber(),channel.getHashCode()));
 			
 			if ( packet_data != null && channel != null ) {
+				
+				boolean[] check_bool = { false };
+				int[]     check_code = { 0 };
+				
 				String json_text = new String(packet_data, StandardCharsets.UTF_8);
 				
 				JoinGame receive = JSON.parseObject(json_text, JoinGame.class);
-				if ( receive != null && channel != null) {
-					JoinGameResult  responses = new JoinGameResult();
-					
-					if ( responses != null ) {						
+				if ( receive != null && channel != null) {					
+					Service exeService = ServiceManage.getServiceObjectByType(ServiceExecuteEnum.SEE_JoinGame.getType(),check_code);
+					if ( check_code[0] >= 1 && exeService != null) {
 						/*
-						 * new com.alibaba.fastjson.serializer.PascalNameFilter()
-						 * 字首不會轉成小寫
-						 */	
-						//channel.writeJSON(JSON.toJSONString(responses, SerializerFeature.WriteClassName));
-						channel.writeJSON(JSON.toJSONString(responses,new com.alibaba.fastjson.serializer.PascalNameFilter()));
-					}					
+						 *  channel.hashCode() -> 所產生 hashCode() 在編碼上有可能會沖撞
+						 *  要使用  getHashCode
+						 */
+						SysLog.PrintError(String.format("[Logic:%s]  Check Hash Code:%d",getLogicName(),channel.hashCode()));
+						exeService.put(ServiceKeys.CHANNEL_HASH_CODE, channel.getHashCode());
+						exeService.put(ServiceKeys.JSON_STRINGS, json_text);
+						ServiceManage.addService(exeService);
+					}				
 				}
 			}			
 		}
@@ -84,8 +95,7 @@ public class Logic_JoinGameResult implements CommonLogic {
 		
 		}
 		finally	{
-			SysLog.PrintError("Logic_JoinGameResult Run finally!!");
-			
+			SysLog.PrintError(String.format("[Logic:%s]  Run Date:%d  Runing Endded...!!!", getLogicName(),UtilTimeManage.getCurrentTimeToNumber()));	
 		}
 
 	}

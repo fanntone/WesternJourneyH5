@@ -1,5 +1,7 @@
 package com.jinglei.packets.stoc;
 
+import com.jinglei.hibernate.read.account_data;
+import com.jinglei.game.server.common.StatusCode;
 import com.jinglei.server.logic.JSONBean;
 
 
@@ -243,6 +245,41 @@ public class JoinGameResult implements JSONBean {
 		this.UseInfo		=	use_info;
 		this.LanguageID		=	lang_id;
 		this.EquipmentID	=	eqi_id;
+	}
+	
+	/*
+	 * JoinGameResult construct
+	 * 						StateCode		int  	狀態碼
+	 *						MemberID		int  	玩家唯一碼
+	 *						CurrencyID		int  	玩家幣別
+	 *						Account			String 	玩家帳號
+	 * 						NickName		String 	玩家暱稱
+	 * 						PassWord		String 	玩家密碼
+	 * 						ErrorCount		int  	密碼錯誤次數
+	 * 						Points			int  	玩家現有點數
+	 * 						GameID			int  	玩家在線狀態
+	 * 						UseInfo			int  	帳號是否可用
+	 * 						LanguageID		int		玩家所使用的語言
+	 * 						EquipmentID		int		玩家所使用的裝置 
+	 */
+	public JoinGameResult(account_data data) {
+		if ( data != null ) {
+			this.StateCode		=	StatusCode.Success.getCode();
+			this.MemberID		=	data.getMemberID();
+			this.CurrencyID		=	data.getCurrencyID();
+			this.Account		=	data.getAccount();
+			this.NickName		=	data.getNickName();
+			this.PassWord		=	data.getPassWord();
+			this.ErrorCount		=	data.getErrorCount();
+			this.Points			=	data.getPoints();
+			this.GameID			=	data.getGameID();
+			this.UseInfo		=	data.getUseInfo() == true ? 1:0;
+			this.LanguageID		=	data.getLanguageID();
+			this.EquipmentID	=	data.getEquipmentID();
+		}
+		else {
+			this.StateCode		=	StatusCode.Failure.getCode();
+		}
 	}
 
 }
