@@ -60,10 +60,10 @@ public class CGThisGroup {
 	public int CSGrpUniID_ = 0;
 	public int GSGrpUniID_ = 0;
 	public int GrpLogDBUniID = 0;
-	public GRP_TYPE GrpType = GRP_TYPE.GRP_TYPE_STC_PLAYERS;
-	public COIN_TYPE CoinType = COIN_TYPE.COIN_TYPE_V_COIN;
-	public GAME_TYPE GameType = GAME_TYPE.GAME_TYPE_LOBBY;
-	public GAME_GRP_MODE GameMode = GAME_GRP_MODE.GAME_GRP_MODE_AUTO_LV1;
+	public CGGrpTypes GrpType = CGGrpTypes.GRP_TYPE_STC_PLAYERS;
+	public CGCoinTypes CoinType = CGCoinTypes.COIN_TYPE_V_COIN;
+	public CGGameTypes GameType = CGGameTypes.GAME_TYPE_LOBBY;
+	public CGGameGrpModes GameMode = CGGameGrpModes.GAME_GRP_MODE_AUTO_LV1;
 	public int CurMenInGrp = 0;
 	public int MaxMenInGrp = 0;
 	public int State = 0;
@@ -74,8 +74,8 @@ public class CGThisGroup {
 	public int[] ParamLst = {0};
 	public int wParam;
 	public int lParam;
-	public PLAYER pPLVec = null;
-	public PLAYER pGMVec = null;
+	public CGPlayer pPLVec = null;
+	public CGPlayer pGMVec = null;
 	public int pPLState = 0;
 	public int pPLLastAccess = 0;
 	public int Handle = 0;
@@ -86,8 +86,8 @@ public class CGThisGroup {
 	public int LogoSceneLog = 0;
 	public int Probability = 0;
 	public CGServerLogic pServerLogic = null;
-	public CG_MSG_SENDER MsgSender = null;
-	public CARD_TYPE CardType = CARD_TYPE.CARD_TYPE_MEMBER;
+	public CGMsgSender MsgSender = null;
+	public CGCardTypes CardType = CGCardTypes.CARD_TYPE_MEMBER;
 	public String GrpUniID = "";
 	public String GSName = "";
 	public int RandomCode = 0;

@@ -1,9 +1,9 @@
 package com.jinglei.game.server.common;
 
 
-public class CG_MSG_SENDER {
+public class CGMsgSender {
 
-	public CG_MSG_SENDER() {
+	public CGMsgSender() {
 		
 	}
 }

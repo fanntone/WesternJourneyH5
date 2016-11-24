@@ -1,6 +1,6 @@
 package com.jinglei.game.server.common;
 
-public enum GAME_GRP_MODE {
+public enum CGGameGrpModes {
 	GAME_GRP_MODE_AUTO_LV1,
 	GAME_GRP_MODE_AUTO_LV2,
 	GAME_GRP_MODE_AUTO_LV3,

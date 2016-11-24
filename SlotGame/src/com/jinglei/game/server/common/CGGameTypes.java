@@ -1,7 +1,7 @@
 package com.jinglei.game.server.common;
 
 
-public enum GAME_TYPE {
+public enum CGGameTypes {
 	GAME_TYPE_LOBBY,       									///< 大廳
 	GAME_TYPE_ALL,											///< 指所有遊戲
 	GAME_TYPE_HOLDEM,										///< 德州撲克

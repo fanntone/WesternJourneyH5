@@ -1,7 +1,7 @@
 package com.jinglei.game.server.common;
 
 
-public class PLAYER {
+public class CGPlayer {
 	
 //	struct PLAYER
 //	{
@@ -52,14 +52,14 @@ public class PLAYER {
 //	};
 	
 	
-	public PLAYER(GAME_GRP pGrp, PL_IN_GRP_INFO pPLInfo) {
+	public CGPlayer(CGGameGrp pGrp, CGPlayerInGrpInfo pPLInfo) {
 		
 	}
 	
-	public PL_STATE State = PL_STATE.PL_STATE_READY_GAME;
-	public CARD_TYPE CardType = CARD_TYPE.CARD_TYPE_MEMBER;
-	public PL_DB UserDB = null;
-	public GAME_GRP pGameGrp = null;
+	public CGPlayerState State = CGPlayerState.PL_STATE_READY_GAME;
+	public CGCardTypes CardType = CGCardTypes.CARD_TYPE_MEMBER;
+	public CGPlayerDB UserDB = null;
+	public CGGameGrp pGameGrp = null;
 	public int SeatNo = 0;
 	public int tmLastAccess = 0;
 	public int OnLineState = 0;
@@ -71,7 +71,7 @@ public class PLAYER {
 	public int AutoNetDisconnRun = 0;
 	public int IPAdr = 0;
 	public int MACAdr = 0;
-	public GAActor pActor = GAActor.GRP_TYPE_STC_PLAYERS;
+	public CGGAActor pActor = CGGAActor.GRP_TYPE_STC_PLAYERS;
 	public int tmLastCriticalMsg = 0;
 	public int tmLastTick = 0;
 	public int LastCmd2Send = 0;

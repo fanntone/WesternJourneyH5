@@ -1,7 +1,7 @@
 package com.jinglei.game.server.common;
 
 
-public class PL_DB {
+public class CGPlayerDB {
 	
 //	struct PL_DB
 //	{
@@ -28,7 +28,7 @@ public class PL_DB {
 //		STR256									PicURL;														///< 照片連結網址
 //	};
 	
-	public PL_DB() {
+	public CGPlayerDB() {
 		
 	}
 	
@@ -50,7 +50,7 @@ public class PL_DB {
 	public int Level = 0;
 	public String CardName = null;
 	public String NickName = null;
-	public GAME_SCORE GameScore = null;
+	public CGGameScore GameScore = null;
 	public String PicURL = null;
 	
 }

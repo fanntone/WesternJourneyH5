@@ -1,8 +1,8 @@
 package com.jinglei.game.server.common;
 
-public class GAME_GRP {
+public class CGGameGrp {
 	
-	public GAME_GRP() {
+	public CGGameGrp() {
 		
 	}
 }

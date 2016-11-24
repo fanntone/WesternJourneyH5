@@ -1,7 +1,7 @@
 package com.jinglei.game.server.common;
 
 
-public class GAME_SCORE {
+public class CGGameScore {
 
 //	struct GAME_SCORE
 //	{
@@ -25,7 +25,7 @@ public class GAME_SCORE {
 //		Int     								Custom10;   												///< 自定變數, 絕對值(RW)
 //	};
 
-	public GAME_SCORE() {
+	public CGGameScore() {
 		
 	}
 	
