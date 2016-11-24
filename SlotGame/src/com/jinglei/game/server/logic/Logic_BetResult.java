@@ -66,6 +66,7 @@ public class Logic_BetResult implements CommonLogic {
 						 * 字首不會轉成小寫
 						 */	
 						//channel.writeJSON(JSON.toJSONString(responses, SerializerFeature.WriteClassName));
+						SysLog.PrintError(JSON.toJSONString(responses,new com.alibaba.fastjson.serializer.PascalNameFilter()));
 						channel.writeJSON(JSON.toJSONString(responses,new com.alibaba.fastjson.serializer.PascalNameFilter()));
 					}					
 				}
