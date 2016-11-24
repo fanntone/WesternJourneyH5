@@ -27,8 +27,8 @@ public class CGGSLTableInfo implements JSONBean {
 		return this.Auto_;
 	}
 
-	public void setAuto(int auto) {
-		this.Auto_ = auto;
+	public void setAuto(int value) {
+		this.Auto_ = value;
 	}
 	
 }

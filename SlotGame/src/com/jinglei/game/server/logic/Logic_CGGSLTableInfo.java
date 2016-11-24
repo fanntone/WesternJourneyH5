@@ -14,7 +14,7 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 	@Override
 	public void executeLogic(byte[] packet_data, NettyClientChannel channel) {
 		try	{
-			SysLog.PrintError("Logic_CGGSLTableInfo Run !!");
+			SysLog.PrintInfo("Logic_CGGSLTableInfo Run !!");
 			
 			if ( packet_data != null && channel != null ) {
 				String json_text = new String(packet_data, StandardCharsets.UTF_8);
@@ -38,9 +38,8 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 			
 		}
 		finally {
-			SysLog.PrintError("Logic_CGGSLTableInfo Run finally!!");
-		}
-		
+			SysLog.PrintInfo("Logic_CGGSLTableInfo Run finally!!");
+		}	
 	}
 
 	@Override
