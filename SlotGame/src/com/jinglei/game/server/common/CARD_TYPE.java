@@ -1,17 +1,6 @@
 package com.jinglei.game.server.common;
 
-import com.jinglei.server.logic.JSONBean;
-
-public class CARD_TYPE implements JSONBean {
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public CARD_TYPE() {
-		
-	}
-
+public enum CARD_TYPE {
+    CARD_TYPE_MEMBER,
+    CARD_TYPE_MAX,
 }

@@ -1,17 +1,11 @@
 package com.jinglei.game.server.common;
 
-import com.jinglei.server.logic.JSONBean;
-
-public class GAME_GRP_MODE implements JSONBean {
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return new String("GAME_GRP_MODE");
-	}
-	
-	public GAME_GRP_MODE() {
-		
-	}
-
+public enum GAME_GRP_MODE {
+	GAME_GRP_MODE_AUTO_LV1,
+	GAME_GRP_MODE_AUTO_LV2,
+	GAME_GRP_MODE_AUTO_LV3,
+	GAME_GRP_MODE_AUTO_LV4,
+	GAME_GRP_MODE_CUSTOM,
+	GAME_GRP_MODE_MAX,
+	GAME_GRP_MODE_AUTO_NUM
 }

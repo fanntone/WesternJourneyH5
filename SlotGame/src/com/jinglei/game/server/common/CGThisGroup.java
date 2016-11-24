@@ -1,18 +1,6 @@
 package com.jinglei.game.server.common;
 
-import com.jinglei.server.logic.JSONBean;
-
-public class CGThisGroup implements JSONBean {
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return new String("CGThisGroup");
-	}
-	
-	public CGThisGroup() {
-		
-	}
+public class CGThisGroup {
 	
 //	struct GAME_GRP
 //	{
@@ -60,6 +48,10 @@ public class CGThisGroup implements JSONBean {
 //		DInt*									pJPBonusParamList;											///< 設定彩金的參數(例如彩金上，下限…)
 //		BL										Finish8ThisRound;											///< 該回合結果後，不得繼續遊戲
 //	};
+	
+	public CGThisGroup() {
+		
+	}
 
 	public int tmRunGrp_ = 0;
 	public int tmFmGrp_ = 0;
@@ -68,10 +60,10 @@ public class CGThisGroup implements JSONBean {
 	public int CSGrpUniID_ = 0;
 	public int GSGrpUniID_ = 0;
 	public int GrpLogDBUniID = 0;
-	public GRP_TYPE GrpType = new GRP_TYPE();
-	public COIN_TYPE CoinType = new COIN_TYPE();
-	public GAME_TYPE GameType = new GAME_TYPE();
-	public GAME_GRP_MODE GameMode = new GAME_GRP_MODE();
+	public GRP_TYPE GrpType = GRP_TYPE.GRP_TYPE_STC_PLAYERS;
+	public COIN_TYPE CoinType = COIN_TYPE.COIN_TYPE_V_COIN;
+	public GAME_TYPE GameType = GAME_TYPE.GAME_TYPE_LOBBY;
+	public GAME_GRP_MODE GameMode = GAME_GRP_MODE.GAME_GRP_MODE_AUTO_LV1;
 	public int CurMenInGrp = 0;
 	public int MaxMenInGrp = 0;
 	public int State = 0;
@@ -79,11 +71,11 @@ public class CGThisGroup implements JSONBean {
 	public int FreeGame = 0;
 	public int Second = 0;
 	public int BasePoints = 0;
-	public int[] ParamLst = new int[16];
+	public int[] ParamLst = {0};
 	public int wParam;
 	public int lParam;
-	public PLAYER pPLVec = new PLAYER();
-	public PLAYER pGMVec = new PLAYER();
+	public PLAYER pPLVec = null;
+	public PLAYER pGMVec = null;
 	public int pPLState = 0;
 	public int pPLLastAccess = 0;
 	public int Handle = 0;
@@ -93,15 +85,14 @@ public class CGThisGroup implements JSONBean {
 	public int PointRatioR = 0;
 	public int LogoSceneLog = 0;
 	public int Probability = 0;
-	public CGServerLogic pServerLogic = new CGServerLogic();
-	public CG_MSG_SENDER MsgSender = new CG_MSG_SENDER();
-	public CARD_TYPE CardType = new CARD_TYPE();
+	public CGServerLogic pServerLogic = null;
+	public CG_MSG_SENDER MsgSender = null;
+	public CARD_TYPE CardType = CARD_TYPE.CARD_TYPE_MEMBER;
 	public String GrpUniID = "";
 	public String GSName = "";
 	public int RandomCode = 0;
 	public String HoldPassword = "";
 	public int pJPBonusList = 0;
 	public int pJPBonusParamList = 0;
-	public Boolean Finish8ThisRound = false;
-	
+	public boolean Finish8ThisRound = false;	
 }

@@ -1,16 +1,8 @@
 package com.jinglei.game.server.common;
 
-import com.jinglei.server.logic.JSONBean;
 
-public class COIN_TYPE implements JSONBean {
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return new String("COIN_TYPE");
-	}
-
-	public COIN_TYPE() {
-		
-	}
+public enum COIN_TYPE {
+    COIN_TYPE_V_COIN,										///< 有價幣
+    COIN_TYPE_F_COIN,										///< 免費幣
+    COIN_TYPE_MAX,
 }
