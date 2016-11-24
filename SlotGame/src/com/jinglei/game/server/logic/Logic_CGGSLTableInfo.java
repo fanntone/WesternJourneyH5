@@ -35,7 +35,7 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 			}	
 		}
 		catch(Exception e) {
-			SysLog.PrintInfo("Logic_CGSLGameReLogin Run Error!!");
+			SysLog.PrintInfo("Logic_CGGSLTableInfo Run Error!!");
 		}
 		finally {
 			SysLog.PrintInfo("Logic_CGGSLTableInfo Run finally!!");
