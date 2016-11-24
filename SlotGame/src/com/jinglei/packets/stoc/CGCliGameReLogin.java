@@ -25,8 +25,8 @@ public class CGCliGameReLogin implements JSONBean {
 		return this.State_;
 	}
 	
-	public void setState(int state) {
-		this.State_ = state;
+	public void setState(int value) {
+		this.State_ = value;
 	}
 
 }

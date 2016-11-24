@@ -32,39 +32,39 @@ public class CGSLGameReLogin implements JSONBean {
 		return this.GameType_;
 	}
 	
-	public void setGameType(int game_type) {
-		this.GameType_ = game_type;
+	public void setGameType(int value) {
+		this.GameType_ = value;
 	}
 	
 	public int getSeatNo() {
 		return this.SeatNo_;
 	}
 	
-	public void setSeatNo(int seat_no) {
-		this.SeatNo_ = seat_no;
+	public void setSeatNo(int value) {
+		this.SeatNo_ = value;
 	}
 	
 	public int getnPoints() {
 		return this.nPoints_;
 	}
 	
-	public void setnPoints(int npoints) {
-		this.nPoints_ = npoints;
+	public void setnPoints(int value) {
+		this.nPoints_ = value;
 	}
 	
 	public String getCardName() {
 		return this.CardName_;
 	}
 	
-	public void setCardName(String card_name) {
-		this.CardName_ = card_name;
+	public void setCardName(String value) {
+		this.CardName_ = value;
 	}
 	
 	public String getNickName_() {
 		return this.NickName_;
 	}
 	
-	public void setNickName_(String nick_name) {
-		this.NickName_ = nick_name;
+	public void setNickName_(String value) {
+		this.NickName_ = value;
 	}
 }

@@ -43,32 +43,32 @@ public class CGGCliTableInfo implements JSONBean {
 		return this.SeatNo_;
 	}
 	
-	public void setSeatNo(int seat_no) {
-		this.SeatNo_ = seat_no;
+	public void setSeatNo(int value) {
+		this.SeatNo_ = value;
 	}
 	
 	public int getPairerMinBet() {
 		return this.PairerMinBet_;
 	}
 	
-	public void setPairerMinBet(int pairer_min_bet) {
-		this.PairerMinBet_ = pairer_min_bet;
+	public void setPairerMinBet(int value) {
+		this.PairerMinBet_ = value;
 	}
 	
 	public int getPairerMaxBet() {
 		return this.PairerMaxBet_;
 	}
 	
-	public void setPairerMaxBet(int pairer_max_bet) {
-		this.PairerMaxBet_ = pairer_max_bet;
+	public void setPairerMaxBet(int value) {
+		this.PairerMaxBet_ = value;
 	}
 	
 	public int getiTurnStop_() {
 		return this.iTurnStop_;
 	}
 	
-	public void setiTurnStop(int iturn_stop) {
-		this.iTurnStop_ = iturn_stop;
+	public void setiTurnStop(int value) {
+		this.iTurnStop_ = value;
 	}
 	
 	public int getiRandomTimes(int index) {
@@ -91,31 +91,31 @@ public class CGGCliTableInfo implements JSONBean {
 		return this.NationPointRatio_;
 	}
 	
-	public void setNationPointRatio(int nation_point_ratio_) {
-		this.NationPointRatio_ = nation_point_ratio_;
+	public void setNationPointRatio(int value) {
+		this.NationPointRatio_ = value;
 	}
 	
 	public int getiUserPoint() {
 		return this.iUserPoint_;
 	}
 	
-	public void setiUserPoint(int iuser_point) {
-		this.iUserPoint_ = iuser_point;
+	public void setiUserPoint(int value) {
+		this.iUserPoint_ = value;
 	}
 	
 	public int getiJPBonus() {
 		return this.iJPBonus_;
 	}
 	
-	public void setiJPBonus(int ijp_bonus) {
-		this.iJPBonus_ = ijp_bonus;
+	public void setiJPBonus(int value) {
+		this.iJPBonus_ = value;
 	}
 	
 	public int getiPlatformJpBouns() {
 		return this.iPlatformJpBouns_;
 	}
 	
-	public void setiPlatformJpBouns(int iplatform_jp_bouns_) {
-		this.iPlatformJpBouns_ = iplatform_jp_bouns_;
+	public void setiPlatformJpBouns(int value) {
+		this.iPlatformJpBouns_ = value;
 	}
 }
