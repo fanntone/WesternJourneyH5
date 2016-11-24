@@ -17,7 +17,7 @@ public class Logic_CGSLGameReLogin implements CommonLogic {
 	@Override
 	public void executeLogic(byte[] packet_data, NettyClientChannel channel) {
 		try	{
-			SysLog.PrintError("Logic_CGSLGameReLogin Run !!");
+			SysLog.PrintInfo("Logic_CGSLGameReLogin Run !!");
 			
 			if ( packet_data != null && channel != null ) {
 				String json_text = new String(packet_data, StandardCharsets.UTF_8);
@@ -38,10 +38,10 @@ public class Logic_CGSLGameReLogin implements CommonLogic {
 			}	
 		}
 		catch(Exception e) {
-			
+			SysLog.PrintError("Logic_CGSLGameReLogin Run Error!!");
 		}
 		finally {
-			SysLog.PrintError("Logic_CGSLGameReLogin Run finally!!");
+			SysLog.PrintInfo("Logic_CGSLGameReLogin Run finally!!");
 		}
 
 	}
