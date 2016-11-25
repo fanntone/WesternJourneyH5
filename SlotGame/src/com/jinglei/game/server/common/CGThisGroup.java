@@ -41,10 +41,10 @@ public class CGThisGroup {
 //		CARD_TYPE			CardType;						///< 參考CARD_TYPE
 //		STR16				GrpUniID;						///< 將號
 //		STR32				GSName;							///< GS Name
-//		Dword				RandomCode;						////< 隨機分配的亂數唯一碼
+//		Dword				RandomCode;						///< 隨機分配的亂數唯一碼
 //		Int					Hold;
 //		wchar_t				HoldPassword[PASSWORD_LENGTH];
-//		DInt*				pJPBonusList;					////< JP彩金
+//		DInt*				pJPBonusList;					///< JP彩金
 //		DInt*				pJPBonusParamList;				///< 設定彩金的參數(例如彩金上，下限…)
 //		BL					Finish8ThisRound;				///< 該回合結果後，不得繼續遊戲
 //	};
