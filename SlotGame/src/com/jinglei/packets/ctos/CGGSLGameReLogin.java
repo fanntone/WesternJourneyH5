@@ -2,7 +2,7 @@ package com.jinglei.packets.ctos;
 
 import com.jinglei.server.logic.JSONBean;
 
-public class CGSLGameReLogin implements JSONBean {
+public class CGGSLGameReLogin implements JSONBean {
 	
 //	struct CGSLGameReLogin
 //	{
@@ -16,10 +16,10 @@ public class CGSLGameReLogin implements JSONBean {
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return new String("CGSLGameReLogin");
+		return new String("CGGSLGameReLogin");
 	}
 	
-	public CGSLGameReLogin() {
+	public CGGSLGameReLogin() {
 	}
 	
 	private int GameType_ = 0;

@@ -5,31 +5,31 @@ import com.jinglei.game.SysLog;
 import com.jinglei.server.logic.CommonLogic;
 import java.nio.charset.StandardCharsets;
 import com.alibaba.fastjson.JSON;
-import com.jinglei.packets.ctos.CGSLGameReLogin;
-import com.jinglei.packets.stoc.CGCliGameReLogin;
+import com.jinglei.packets.ctos.CGGSLGameReLogin;
+import com.jinglei.packets.stoc.CGGCliGameReLogin;
 
-public class Logic_CGSLGameReLogin implements CommonLogic {
+public class Logic_CGGSLGameReLogin implements CommonLogic {
 
-	public Logic_CGSLGameReLogin() {
+	public Logic_CGGSLGameReLogin() {
 		super();
 	}
 	
 	@Override
 	public void executeLogic(byte[] packet_data, NettyClientChannel channel) {
 		try	{
-			SysLog.PrintInfo("Logic_CGSLGameReLogin Run !!");
+			SysLog.PrintInfo("Logic_CGGSLGameReLogin Run !!");
 			
 			if ( packet_data != null && channel != null ) {
 				String json_text = new String(packet_data, StandardCharsets.UTF_8);
-				CGSLGameReLogin receive = JSON.parseObject(json_text, CGSLGameReLogin.class);
+				CGGSLGameReLogin receive = JSON.parseObject(json_text, CGGSLGameReLogin.class);
 				
 				if ( receive != null && channel != null) {
-					CGCliGameReLogin responses = new CGCliGameReLogin();
+					CGGCliGameReLogin responses = new CGGCliGameReLogin();
 					
 					if ( responses != null ) {
 						String json2string = JSON.toJSONString(responses,
 															   new com.alibaba.fastjson.serializer.PascalNameFilter());
-						SysLog.PrintInfo(String.format("Logic_CGSLGameReLogin Command:%s WriteJSON:[%s]!!",
+						SysLog.PrintInfo(String.format("Logic_CGGSLGameReLogin Command:%s WriteJSON:[%s]!!",
 										 "CGCliGameReLogin",
 										 json2string));
 						channel.writeJSON(json2string);
@@ -38,10 +38,10 @@ public class Logic_CGSLGameReLogin implements CommonLogic {
 			}	
 		}
 		catch(Exception e) {
-			SysLog.PrintError("Logic_CGSLGameReLogin Run Error!!");
+			SysLog.PrintError("Logic_CGGSLGameReLogin Run Error!!");
 		}
 		finally {
-			SysLog.PrintInfo("Logic_CGSLGameReLogin Run finally!!");
+			SysLog.PrintInfo("Logic_CGGSLGameReLogin Run finally!!");
 		}
 
 	}
@@ -55,7 +55,7 @@ public class Logic_CGSLGameReLogin implements CommonLogic {
 	@Override
 	public CommonLogic newInstance() {
 		// TODO Auto-generated method stub
-		return new Logic_CGSLGameReLogin();
+		return new Logic_CGGSLGameReLogin();
 	}
 
 }
