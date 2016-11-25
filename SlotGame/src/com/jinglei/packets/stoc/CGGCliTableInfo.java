@@ -28,94 +28,15 @@ public class CGGCliTableInfo implements JSONBean {
 		
 	}
 	
-	private int SeatNo_ = 0;
-	private int PairerMinBet_ = 0;
-	private int PairerMaxBet_ = 0;
-	private int iTurnStop_ = 0;
-	private int[] iRandomTimes_ = new int[12]; 
-	private int[][] iHistoryRecord_ = new int[8][2];
-	private int NationPointRatio_ = 0;
-	private int iUserPoint_ = 0;
-	private int iJPBonus_= 0;
-	private int iPlatformJpBouns_ = 0;
-	
-	public int getSeatNo() {
-		return this.SeatNo_;
-	}
-	
-	public void setSeatNo(int value) {
-		this.SeatNo_ = value;
-	}
-	
-	public int getPairerMinBet() {
-		return this.PairerMinBet_;
-	}
-	
-	public void setPairerMinBet(int value) {
-		this.PairerMinBet_ = value;
-	}
-	
-	public int getPairerMaxBet() {
-		return this.PairerMaxBet_;
-	}
-	
-	public void setPairerMaxBet(int value) {
-		this.PairerMaxBet_ = value;
-	}
-	
-	public int getiTurnStop_() {
-		return this.iTurnStop_;
-	}
-	
-	public void setiTurnStop(int value) {
-		this.iTurnStop_ = value;
-	}
-	
-	public int getiRandomTimes(int index) {
-		return this.iRandomTimes_[index];
-	}
-	
-	public void setiRandomTimes(int index, int value) {
-		this.iRandomTimes_[index] = value;
-	}
-	
-	public int getiHistoryRecord(int index_x, int index_y) {
-		return this.iHistoryRecord_[index_x][index_y];
-	}
-	
-	public void setiRandomTimes(int index_x, int index_y, int value) {
-		this.iHistoryRecord_[index_x][index_y] = value;
-	}
-	
-	public int getNationPointRatio() {
-		return this.NationPointRatio_;
-	}
-	
-	public void setNationPointRatio(int value) {
-		this.NationPointRatio_ = value;
-	}
-	
-	public int getiUserPoint() {
-		return this.iUserPoint_;
-	}
-	
-	public void setiUserPoint(int value) {
-		this.iUserPoint_ = value;
-	}
-	
-	public int getiJPBonus() {
-		return this.iJPBonus_;
-	}
-	
-	public void setiJPBonus(int value) {
-		this.iJPBonus_ = value;
-	}
-	
-	public int getiPlatformJpBouns() {
-		return this.iPlatformJpBouns_;
-	}
-	
-	public void setiPlatformJpBouns(int value) {
-		this.iPlatformJpBouns_ = value;
-	}
+	public int SeatNo_ = 0;
+	public int PairerMinBet_ = 0;
+	public int PairerMaxBet_ = 0;
+	public int iTurnStop_ = 0;
+	public int[] iRandomTimes_ = new int[12]; 
+	public int[][] iHistoryRecord_ = new int[8][2];
+	public int NationPointRatio_ = 0;
+	public int iUserPoint_ = 0;
+	public int iJPBonus_= 0;
+	public int iPlatformJpBouns_ = 0;
+
 }

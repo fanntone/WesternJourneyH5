@@ -44,6 +44,9 @@ public class ActorKeys {
 	/*
 	 * 玩家 經度 DOUBLE
 	 */
-	public static  final String USER_LONGITUDE = "USER_LONGITUD";		
+	public static  final String USER_LONGITUDE = "USER_LONGITUD";	
+	
+	// 玩家現在在遊戲桌裡的流程狀態
+	public static  final String PLAY_GROUP_STATES = "PLAY_GROUP_STATES";
 		
 }

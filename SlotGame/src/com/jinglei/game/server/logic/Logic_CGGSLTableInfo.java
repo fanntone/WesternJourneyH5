@@ -1,13 +1,23 @@
 package com.jinglei.game.server.logic;
 
+
 import java.nio.charset.StandardCharsets;
 
 import com.alibaba.fastjson.JSON;
 import com.jinglei.channel.NettyClientChannel;
 import com.jinglei.game.SysLog;
+import com.jinglei.game.attribute.ActorKeys;
+import com.jinglei.game.attribute.impl.GClonePlayer;
+import com.jinglei.game.manage.ActorManage;
+import com.jinglei.game.server.common.CGGameGrpModes;
+import com.jinglei.game.server.common.CGJourneyBarProb;
+import com.jinglei.game.server.common.CGJourneyBarStatus;
+import com.jinglei.game.server.common.CGThisGroup;
 import com.jinglei.packets.ctos.CGGSLTableInfo;
 import com.jinglei.packets.stoc.CGGCliTableInfo;
 import com.jinglei.server.logic.CommonLogic;
+
+import java.util.Random;
 
 public class Logic_CGGSLTableInfo implements CommonLogic {
 
@@ -16,23 +26,10 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 		try	{
 			SysLog.PrintInfo("Logic_CGGSLTableInfo Run !!");
 			
-			if ( packet_data != null && channel != null ) {
-				String json_text = new String(packet_data, StandardCharsets.UTF_8);
-				CGGSLTableInfo receive = JSON.parseObject(json_text, CGGSLTableInfo.class);
-				
-				if ( receive != null && channel != null) {
-					CGGCliTableInfo responses = new CGGCliTableInfo();
-					
-					if ( responses != null ) {
-						String json2string = JSON.toJSONString(responses,
-															   new com.alibaba.fastjson.serializer.PascalNameFilter());
-						SysLog.PrintInfo(String.format("Logic_CGGSLTableInfo Command:%s WriteJSON:[%s]!!",
-										 "CGGCliTableInfo",
-										 json2string));
-						channel.writeJSON(json2string);
-					}
-				}	
-			}	
+			receive_ = new CGGSLTableInfo();
+			OnReceive(packet_data);
+			if(OnPerformLogic(channel))
+				OnResponse(channel);
 		}
 		catch(Exception e) {
 			SysLog.PrintInfo("Logic_CGGSLTableInfo Run Error!!");
@@ -47,11 +44,90 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 		// TODO Auto-generated method stub
 		return new String(this.getClass().getName());
 	}
-
+	
 	@Override
 	public CommonLogic newInstance() {
 		// TODO Auto-generated method stub
 		return new Logic_CGGSLTableInfo();
+	}
+	
+	public CGGSLTableInfo receive_ = null;
+	public CGGCliTableInfo responses_ = null;
+	public CGThisGroup this_group_ = null;
+	CGJourneyBarProb prob_ = null;
+	
+	public void OnReceive(byte[] packet_data) {
+		String json_text = new String(packet_data, StandardCharsets.UTF_8);
+		this.receive_ = JSON.parseObject(json_text, CGGSLTableInfo.class);
+	}
+	
+	public void OnResponse(NettyClientChannel channel) {
+		String json2string = JSON.toJSONString(this.responses_,
+											   new com.alibaba.fastjson.serializer.PascalNameFilter());
+		SysLog.PrintInfo(String.format("Logic_CGGSLTableInfo Command:%s WriteJSON:[%s]!!",
+						"CGGCliTableInfo",
+						json2string));
+		channel.writeJSON(json2string);
+	}
+	
+	public boolean OnPerformLogic(NettyClientChannel channel) {
+		
+		Integer id = (Integer)channel.get(ActorKeys.MEMBER_ID);
+		GClonePlayer player = ActorManage.GetClonePlayer(id);
+		Object states = player.get(ActorKeys.PLAY_GROUP_STATES);
+		if( states != null) {
+			if ( states != CGJourneyBarStatus.JOURNEYBAR_STATUS_WAIT_PLAY) 
+				return false;
+		}
+		else
+			player.put(ActorKeys.PLAY_GROUP_STATES, CGJourneyBarStatus.JOURNEYBAR_STATUS_BET_TIME);
+
+		
+		if(this.receive_.Auto_ != 1)
+			return false;
+		
+		this_group_ = new CGThisGroup();
+		
+		LoadTurnStopRecord(this_group_.CSGrpNo_, this_group_.GameMode);
+			
+		// initial data
+		if(prob_ == null)
+			prob_ = new CGJourneyBarProb();
+		SetResponsesData();
+		SetCGGCliRandomTimesResult();
+
+		player.put(ActorKeys.PLAY_GROUP_STATES, CGJourneyBarStatus.JOURNEYBAR_STATUS_BET_TIME);
+		
+//		GClonePlayer player = new GClonePlayer(player_channel, accountData.getMemberID());
+//		
+//		if ( player != null ) {
+//			player_channel.put(ActorKeys.MEMBER_ID, new Integer(accountData.getMemberID()));
+//			
+		return true;			
+	}
+	
+	public boolean LoadTurnStopRecord(int group_index, CGGameGrpModes group_mode) {
+	
+		return true;
+	}
+	
+	public void SetCGGCliRandomTimesResult() {
+		for(int i = 0; i < 12; i++) {
+			Random rd = new Random();
+			this.responses_.iRandomTimes_[i] = rd.nextInt(46);
+		}	
+	}
+	
+	public void SetResponsesData() {
+		this.responses_ = new CGGCliTableInfo();
+		this.responses_.SeatNo_ = this_group_.CSGrpNo_;
+		this.responses_.iUserPoint_ = prob_.GetRatioPoint(1);
+		this.responses_.iJPBonus_ = this_group_.pJPBonusList[0];
+		this.responses_.iPlatformJpBouns_ = this_group_.pJPBonusList[0];
+		this.responses_.iTurnStop_ = 1;
+		this.responses_.PairerMinBet_ = 1000;
+		this.responses_.PairerMaxBet_ = 80000;
+		this.responses_.NationPointRatio_ = 3;
 	}
 
 }

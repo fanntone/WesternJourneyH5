@@ -9,7 +9,7 @@ public class CGGSLGameReLogin implements JSONBean {
 //		Char			GameType;		        			// 遊戲型態
 //		Char			SeatNo;								// 座位號
 //		Int				nPoints;							// 目前玩家在大廳的點數
-//		wchar_t			CardName[CARDNAME_LENGTH];			// 玩家名稱. CARDNAME_LENGTH * 2bytes
+//		wchar_t			CardName[CARDNAME_LENGTH];			// 玩家名稱 CARDNAME_LENGTH * 2bytes
 //		wchar_t			NickName[NICKNAME_LENGTH];			// 玩家暱稱  NICKNAME_LENGTH * 2bytes
 //	};
 	
@@ -19,52 +19,22 @@ public class CGGSLGameReLogin implements JSONBean {
 		return new String("CGGSLGameReLogin");
 	}
 	
-	public CGGSLGameReLogin() {
+	public CGGSLGameReLogin(int GameTyep,
+							int SeatNo,
+							int nPoints,
+							String CardName,
+							String NickName) {
+		GameType_ = GameTyep;
+		SeatNo_ = SeatNo;
+		nPoints_ = nPoints;
+		CardName_ = CardName;
+		NickName_ = NickName;
 	}
 	
-	private int GameType_ = 0;
-	private int SeatNo_ = 0;
-	private int nPoints_ = 0;
-	private String CardName_ = "";
-	private String NickName_ = "";
+	public int GameType_ = 0;
+	public int SeatNo_ = 0;
+	public int nPoints_ = 0;
+	public String CardName_ = "";
+	public String NickName_ = "";
 	
-	public int getGameType() {
-		return this.GameType_;
-	}
-	
-	public void setGameType(int value) {
-		this.GameType_ = value;
-	}
-	
-	public int getSeatNo() {
-		return this.SeatNo_;
-	}
-	
-	public void setSeatNo(int value) {
-		this.SeatNo_ = value;
-	}
-	
-	public int getnPoints() {
-		return this.nPoints_;
-	}
-	
-	public void setnPoints(int value) {
-		this.nPoints_ = value;
-	}
-	
-	public String getCardName() {
-		return this.CardName_;
-	}
-	
-	public void setCardName(String value) {
-		this.CardName_ = value;
-	}
-	
-	public String getNickName_() {
-		return this.NickName_;
-	}
-	
-	public void setNickName_(String value) {
-		this.NickName_ = value;
-	}
 }

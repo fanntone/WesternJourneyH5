@@ -50,7 +50,7 @@ public class CGThisGroup {
 //	};
 	
 	public CGThisGroup() {
-		
+		// TODO: get redis data to set default member value.
 	}
 
 	public int tmRunGrp_ = 0;
@@ -92,7 +92,7 @@ public class CGThisGroup {
 	public String GSName = "";
 	public int RandomCode = 0;
 	public String HoldPassword = "";
-	public int pJPBonusList = 0;
-	public int pJPBonusParamList = 0;
+	public int[] pJPBonusList = new int[4];
+	public int[] pJPBonusParamList = new int[4];
 	public boolean Finish8ThisRound = false;	
 }
