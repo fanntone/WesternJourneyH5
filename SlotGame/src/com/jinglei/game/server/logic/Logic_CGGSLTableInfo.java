@@ -26,7 +26,6 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 		try	{
 			SysLog.PrintInfo("Logic_CGGSLTableInfo Run !!");
 			
-			receive_ = new CGGSLTableInfo();
 			OnReceive(packet_data);
 			if(OnPerformLogic(channel))
 				OnResponse(channel);
@@ -41,20 +40,18 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 
 	@Override
 	public String getLogicName() {
-		// TODO Auto-generated method stub
 		return new String(this.getClass().getName());
 	}
 	
 	@Override
 	public CommonLogic newInstance() {
-		// TODO Auto-generated method stub
 		return new Logic_CGGSLTableInfo();
 	}
 	
-	public CGGSLTableInfo receive_ = null;
-	public CGGCliTableInfo responses_ = null;
-	public CGThisGroup this_group_ = null;
-	CGJourneyBarProb prob_ = null;
+	public CGGSLTableInfo receive_ = new CGGSLTableInfo();
+	public CGGCliTableInfo responses_ = new CGGCliTableInfo();
+	public CGThisGroup this_group_ = new CGThisGroup();
+	CGJourneyBarProb prob_ = new CGJourneyBarProb();
 	
 	public void OnReceive(byte[] packet_data) {
 		String json_text = new String(packet_data, StandardCharsets.UTF_8);
@@ -70,44 +67,27 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 		channel.writeJSON(json2string);
 	}
 	
-	public boolean OnPerformLogic(NettyClientChannel channel) {
+	public boolean OnPerformLogic(NettyClientChannel channel) {		
+		if(this.receive_.Auto_ != 1)
+			return false;
 		
 		Integer id = (Integer)channel.get(ActorKeys.MEMBER_ID);
 		GClonePlayer player = ActorManage.GetClonePlayer(id);
 		Object states = player.get(ActorKeys.PLAY_GROUP_STATES);
-		if( states != null) {
-			if ( states != CGJourneyBarStatus.JOURNEYBAR_STATUS_WAIT_PLAY) 
-				return false;
-		}
+		if( states != null && states != CGJourneyBarStatus.JOURNEYBAR_STATUS_WAIT_PLAY)
+			return false;
 		else
 			player.put(ActorKeys.PLAY_GROUP_STATES, CGJourneyBarStatus.JOURNEYBAR_STATUS_BET_TIME);
-
-		
-		if(this.receive_.Auto_ != 1)
-			return false;
-		
-		this_group_ = new CGThisGroup();
-		
+					
 		LoadTurnStopRecord(this_group_.CSGrpNo_, this_group_.GameMode);
-			
-		// initial data
-		if(prob_ == null)
-			prob_ = new CGJourneyBarProb();
 		SetResponsesData();
 		SetCGGCliRandomTimesResult();
-
 		player.put(ActorKeys.PLAY_GROUP_STATES, CGJourneyBarStatus.JOURNEYBAR_STATUS_BET_TIME);
-		
-//		GClonePlayer player = new GClonePlayer(player_channel, accountData.getMemberID());
-//		
-//		if ( player != null ) {
-//			player_channel.put(ActorKeys.MEMBER_ID, new Integer(accountData.getMemberID()));
-//			
+				
 		return true;			
 	}
 	
 	public boolean LoadTurnStopRecord(int group_index, CGGameGrpModes group_mode) {
-	
 		return true;
 	}
 	
