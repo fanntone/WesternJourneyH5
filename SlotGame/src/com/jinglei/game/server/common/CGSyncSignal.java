@@ -10,11 +10,21 @@ package com.jinglei.game.server.common;
 
 //同步信號種類
 public enum CGSyncSignal {
-	SYNCSIGNAL_FIRST,
-	SYNCSIGNAL_GAME,			//等待至遊戲幕
-	SYNCSIGNAL_GAME_BALANCE,	//等待至遊戲結算幕
-	SYNCSIGNAL_GROUP_BALANCE,	//等待至局結算幕
-	SYNCSIGNAL_GROUP_OVER,		//等待該局結束
-	SYNCSIGNAL_SCENE_START,		//該幕開始
-	SYNCSIGNAL_MAX				//使用者自訂的訊息從 SYNCSIGNAL_MAX + 1 開始
+	SYNCSIGNAL_FIRST(0),
+	SYNCSIGNAL_GAME(1),			//等待至遊戲幕
+	SYNCSIGNAL_GAME_BALANCE(2),	//等待至遊戲結算幕
+	SYNCSIGNAL_GROUP_BALANCE(3),	//等待至局結算幕
+	SYNCSIGNAL_GROUP_OVER(4),		//等待該局結束
+	SYNCSIGNAL_SCENE_START(5),		//該幕開始
+	SYNCSIGNAL_MAX(6);				//使用者自訂的訊息從 SYNCSIGNAL_MAX + 1 開始
+	
+    private int value_;
+
+    private CGSyncSignal(int value) {
+        this.value_ = value;
+    }
+
+    public int GetValue() {
+    	return value_;
+    }
 }

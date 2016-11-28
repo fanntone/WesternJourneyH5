@@ -19,13 +19,5 @@ public class CGGCliRandomTimesResult implements JSONBean {
 //		int	iRandomTimes[12];				//12格隨機倍率
 //	};
 
-	private int[] iRandomTimes_ = new int[12];
-	
-	public int getiRandomTimes(int index) {
-		return this.iRandomTimes_[index];
-	}
-	
-	public void setiRandomTimes(int index, int value) {
-		this.iRandomTimes_[index] = value;
-	}
+	public  int[] iRandomTimes_ = new int[12];
 }

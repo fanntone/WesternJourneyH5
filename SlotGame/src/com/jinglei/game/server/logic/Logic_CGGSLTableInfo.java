@@ -48,19 +48,19 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 		return new Logic_CGGSLTableInfo();
 	}
 	
-	public CGGSLTableInfo receive_ = new CGGSLTableInfo();
-	public CGGCliTableInfo responses_ = new CGGCliTableInfo();
-	public CGThisGroup this_group_ = new CGThisGroup();
-	CGJourneyBarProb prob_ = new CGJourneyBarProb();
+	private CGGSLTableInfo receive_ = new CGGSLTableInfo();
+	private CGGCliTableInfo responses_ = new CGGCliTableInfo();
+	private CGThisGroup this_group_ = new CGThisGroup();
+	private CGJourneyBarProb prob_ = new CGJourneyBarProb();
 	
-	public void OnReceive(byte[] packet_data) {
+	private void OnReceive(byte[] packet_data) {
 		String json_text = new String(packet_data,
 									  StandardCharsets.UTF_8);
 		this.receive_ = JSON.parseObject(json_text,
 										 CGGSLTableInfo.class);
 	}
 	
-	public void OnResponse(NettyClientChannel channel) {
+	private void OnResponse(NettyClientChannel channel) {
 		String json2string = JSON.toJSONString(this.responses_,
 											   new com.alibaba.fastjson.serializer.PascalNameFilter());
 		SysLog.PrintInfo(String.format("Logic_CGGSLTableInfo Command:%s WriteJSON:[%s]!!",
@@ -69,42 +69,39 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 		channel.writeJSON(json2string);
 	}
 	
-	public boolean OnPerformLogic(NettyClientChannel channel) {		
+	private boolean OnPerformLogic(NettyClientChannel channel) {				
+		GClonePlayer player = GetGClonePlayer(GetGroupId(channel));
+		String states = GetPlayGroupStates(player);
+		
+		if( states == null || Integer.parseInt(states, 10) != CGJourneyBarStatus.JOURNEYBAR_STATUS_WAIT_PLAY.GetValue())
+			return false;
+		
+		LoadProbBankRecord();
+		InitProbData();
+		LoadTurnStopRecord();
+		
 		if(this.receive_.Auto_ != 1)
 			return false;
 		
-		Integer id = (Integer)channel.get(ActorKeys.MEMBER_ID);
-		GClonePlayer player = ActorManage.GetClonePlayer(id);
-		Object states = player.get(ActorKeys.PLAY_GROUP_STATES);
-		if( states != null && states != CGJourneyBarStatus.JOURNEYBAR_STATUS_WAIT_PLAY)
-			return false;
-		else
-			player.put(ActorKeys.PLAY_GROUP_STATES,
-					   CGJourneyBarStatus.JOURNEYBAR_STATUS_BET_TIME);
-					
-		LoadTurnStopRecord(this_group_.CSGrpNo_,
-						   this_group_.GameMode);
 		SetResponsesData();
-		SetCGGCliRandomTimesResult();
-		player.put(ActorKeys.PLAY_GROUP_STATES,
-				   CGJourneyBarStatus.JOURNEYBAR_STATUS_BET_TIME);
+		SetRandomTimes();
+		SetPlayGroupStates(player);
 				
 		return true;
 	}
 	
-	public boolean LoadTurnStopRecord(int group_index, CGGameGrpModes group_mode) {
+	private boolean LoadTurnStopRecord() {
 		return true;
 	}
 	
-	public void SetCGGCliRandomTimesResult() {
+	private void SetRandomTimes() {
+		prob_.RandomPai();
 		for(int i = 0; i < 12; i++) {
-			Random rd = new Random();
-			this.responses_.iRandomTimes_[i] = rd.nextInt(46);
+			this.responses_.iRandomTimes_[i] = prob_.CliRandomTimesResult_.iRandomTimes_[i];
 		}
 	}
 	
-	public void SetResponsesData() {
-		this.responses_ = new CGGCliTableInfo();
+	private void SetResponsesData() {
 		this.responses_.SeatNo_ = this_group_.CSGrpNo_;
 		this.responses_.iUserPoint_ = prob_.GetRatioPoint(1);
 		this.responses_.iJPBonus_ = this_group_.pJPBonusList[0];
@@ -115,4 +112,31 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 		this.responses_.NationPointRatio_ = 3;
 	}
 
+	private Integer GetGroupId(NettyClientChannel channel) {
+		return (Integer)channel.get(ActorKeys.MEMBER_ID);
+	}
+	
+	private GClonePlayer GetGClonePlayer(Integer id)  {
+		return ActorManage.GetClonePlayer(id);
+	}
+	
+	private String GetPlayGroupStates(GClonePlayer player) {
+		return player.get(ActorKeys.PLAYER_STATES);
+	}
+	
+	private void SetPlayGroupStates(GClonePlayer player) {
+		player.put(ActorKeys.PLAYER_STATES,
+				   CGJourneyBarStatus.JOURNEYBAR_STATUS_BET_TIME);
+	}
+	
+	private void LoadProbBankRecord() {
+		prob_.LoadBankRecord(this_group_.CSGrpNo_,
+							 this_group_.GameMode,
+							 this_group_.PointRatioL,
+							 this_group_.PointRatioR);
+	}
+	
+	private void InitProbData() {
+		prob_.InitData(this_group_);		
+	}
 }

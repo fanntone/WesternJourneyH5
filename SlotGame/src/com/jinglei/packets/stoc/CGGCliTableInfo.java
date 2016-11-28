@@ -25,14 +25,14 @@ public class CGGCliTableInfo implements JSONBean {
 	}
 	
 	public CGGCliTableInfo() {
-		
+
 	}
 	
 	public int SeatNo_ = 0;
 	public int PairerMinBet_ = 0;
 	public int PairerMaxBet_ = 0;
 	public int iTurnStop_ = 0;
-	public int[] iRandomTimes_ = new int[12]; 
+	public int[] iRandomTimes_ = new int[12];
 	public int[][] iHistoryRecord_ = new int[8][2];
 	public int NationPointRatio_ = 0;
 	public int iUserPoint_ = 0;

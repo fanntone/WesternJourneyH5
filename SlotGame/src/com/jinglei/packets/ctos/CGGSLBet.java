@@ -21,34 +21,8 @@ public class CGGSLBet implements JSONBean {
 //		int				iTotalBetPoint;						//押注總金額
 //	};
 	
-	private int[] iBetSum_ = new int[12];
-	private int[] iBetBankPlayerTie_ = new int[3];
-	private int iTotalBetPoint_ = 0;
+	public int[] iBetSum_ = new int[12];
+	public int[] iBetBankPlayerTie_ = new int[3];
+	public int iTotalBetPoint_ = 0;
 	
-	public int getiBetSum(int index)
-	{
-		return this.iBetSum_[index];
-	}
-
-	public void setiBetSum(int index, int value) {
-		this.iBetSum_[index] = value;
-	}
-	
-	public int getiiBetBankPlayerTie(int index)
-	{
-		return this.iBetBankPlayerTie_[index];
-	}
-
-	public void setiiBetBankPlayerTie(int index, int value) {
-		this.iBetBankPlayerTie_[index] = value;
-	}
-	
-	public int getiTotalBetPoint()
-	{
-		return this.iTotalBetPoint_;
-	}
-
-	public void setiTotalBetPoint(int value) {
-		this.iTotalBetPoint_ = value;
-	}
 }

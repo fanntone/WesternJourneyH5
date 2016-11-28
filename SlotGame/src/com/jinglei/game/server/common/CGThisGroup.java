@@ -1,5 +1,12 @@
 package com.jinglei.game.server.common;
 
+import java.security.SecureRandom;
+
+import com.jinglei.game.SysLog;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class CGThisGroup {
 	
 //	struct GAME_GRP
@@ -53,17 +60,17 @@ public class CGThisGroup {
 		// TODO: get redis data to set default member value.
 	}
 
-	public int tmRunGrp_ = 0;
-	public int tmFmGrp_ = 0;
-	public int CSGrpNo_ = 0;
+	public long tmRunGrp_ = GetSystemTime();
+	public long tmFmGrp_ = GetSystemTime();
+	public int CSGrpNo_ = InitThisGroupId();
 	public int GSGrpNo_ = 0;
 	public int CSGrpUniID_ = 0;
 	public int GSGrpUniID_ = 0;
 	public int GrpLogDBUniID = 0;
-	public CGGrpTypes GrpType = CGGrpTypes.GRP_TYPE_STC_PLAYERS;
-	public CGCoinTypes CoinType = CGCoinTypes.COIN_TYPE_V_COIN;
-	public CGGameTypes GameType = CGGameTypes.GAME_TYPE_LOBBY;
-	public CGGameGrpModes GameMode = CGGameGrpModes.GAME_GRP_MODE_AUTO_LV1;
+	public int GrpType = CGGrpTypes.GRP_TYPE_STC_PLAYERS.GetValue();
+	public int CoinType = CGCoinTypes.COIN_TYPE_V_COIN.GetValue();
+	public int GameType = CGGameTypes.GAME_TYPE_LOBBY.GetValue();
+	public int GameMode = CGGameGrpModes.GAME_GRP_MODE_AUTO_LV1.GetValue();
 	public int CurMenInGrp = 0;
 	public int MaxMenInGrp = 0;
 	public int State = 0;
@@ -87,12 +94,50 @@ public class CGThisGroup {
 	public int Probability = 0;
 	public CGServerLogic pServerLogic = null;
 	public CGMsgSender MsgSender = null;
-	public CGCardTypes CardType = CGCardTypes.CARD_TYPE_MEMBER;
+	public int CardType = CGCardTypes.CARD_TYPE_MEMBER.GetValue();
 	public String GrpUniID = "";
 	public String GSName = "";
 	public int RandomCode = 0;
 	public String HoldPassword = "";
 	public int[] pJPBonusList = new int[4];
 	public int[] pJPBonusParamList = new int[4];
-	public boolean Finish8ThisRound = false;	
+	public boolean Finish8ThisRound = false;
+	
+	public void GetThisGroupDataFromRedis() {
+		
+	}
+	
+	public void SetThisGroupDataToRadiw() {
+		
+	}
+	
+	static private String hexEncode(byte[] aInput) {
+		StringBuilder result = new StringBuilder();
+	    char[] digits = {'0', '1', '2', '3', '4','5','6','7','8','9','a','b','c','d','e','f'};
+	    for (int idx = 0; idx < aInput.length; ++idx) {
+	      byte b = aInput[idx];
+	      result.append(digits[ (b&0xf0) >> 4 ]);
+	      result.append(digits[ b&0x0f]);
+	    }
+	    return result.toString();
+	}
+	
+	private int InitThisGroupId() {
+		// example: c8fff94ba996411079d7114e698b53bac8f7b037
+	    try {
+	    	SecureRandom prng = SecureRandom.getInstance("SHA1PRNG");
+	    	String randomNum = new Integer(prng.nextInt()).toString();
+	    	MessageDigest sha = MessageDigest.getInstance("SHA-1");
+	    	byte[] result =  sha.digest(randomNum.getBytes());
+	    	return Integer.parseInt(hexEncode(result), 10); 
+	    }
+	    catch (NoSuchAlgorithmException ex) {
+	    	SysLog.PrintInfo("Logic_CGGSLTableInfo Run finally!!");
+	    	return 0;
+	    }
+	}
+	
+	private long GetSystemTime() {
+		return System.currentTimeMillis();
+	}
 }
