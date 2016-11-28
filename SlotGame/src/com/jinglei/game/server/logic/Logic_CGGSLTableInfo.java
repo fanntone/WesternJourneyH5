@@ -54,8 +54,10 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 	CGJourneyBarProb prob_ = new CGJourneyBarProb();
 	
 	public void OnReceive(byte[] packet_data) {
-		String json_text = new String(packet_data, StandardCharsets.UTF_8);
-		this.receive_ = JSON.parseObject(json_text, CGGSLTableInfo.class);
+		String json_text = new String(packet_data,
+									  StandardCharsets.UTF_8);
+		this.receive_ = JSON.parseObject(json_text,
+										 CGGSLTableInfo.class);
 	}
 	
 	public void OnResponse(NettyClientChannel channel) {
@@ -77,14 +79,17 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 		if( states != null && states != CGJourneyBarStatus.JOURNEYBAR_STATUS_WAIT_PLAY)
 			return false;
 		else
-			player.put(ActorKeys.PLAY_GROUP_STATES, CGJourneyBarStatus.JOURNEYBAR_STATUS_BET_TIME);
+			player.put(ActorKeys.PLAY_GROUP_STATES,
+					   CGJourneyBarStatus.JOURNEYBAR_STATUS_BET_TIME);
 					
-		LoadTurnStopRecord(this_group_.CSGrpNo_, this_group_.GameMode);
+		LoadTurnStopRecord(this_group_.CSGrpNo_,
+						   this_group_.GameMode);
 		SetResponsesData();
 		SetCGGCliRandomTimesResult();
-		player.put(ActorKeys.PLAY_GROUP_STATES, CGJourneyBarStatus.JOURNEYBAR_STATUS_BET_TIME);
+		player.put(ActorKeys.PLAY_GROUP_STATES,
+				   CGJourneyBarStatus.JOURNEYBAR_STATUS_BET_TIME);
 				
-		return true;			
+		return true;
 	}
 	
 	public boolean LoadTurnStopRecord(int group_index, CGGameGrpModes group_mode) {
@@ -95,7 +100,7 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 		for(int i = 0; i < 12; i++) {
 			Random rd = new Random();
 			this.responses_.iRandomTimes_[i] = rd.nextInt(46);
-		}	
+		}
 	}
 	
 	public void SetResponsesData() {
