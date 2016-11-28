@@ -20,4 +20,6 @@ public class CGGCliRandomTimesResult implements JSONBean {
 //	};
 
 	public  int[] iRandomTimes_ = new int[12];
+	
+	
 }

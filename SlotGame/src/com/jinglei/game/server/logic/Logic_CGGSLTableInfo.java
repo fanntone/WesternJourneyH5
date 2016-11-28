@@ -75,14 +75,11 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 		
 		if( states == null || Integer.parseInt(states, 10) != CGJourneyBarStatus.JOURNEYBAR_STATUS_WAIT_PLAY.GetValue())
 			return false;
-		
-		LoadProbBankRecord();
-		InitProbData();
-		LoadTurnStopRecord();
-		
+				
 		if(this.receive_.Auto_ != 1)
 			return false;
 		
+		LoadHistoryRecord();
 		SetResponsesData();
 		SetRandomTimes();
 		SetPlayGroupStates(player);
@@ -90,10 +87,12 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 		return true;
 	}
 	
-	private boolean LoadTurnStopRecord() {
+	// 前八次開獎紀錄	
+	private boolean LoadHistoryRecord() {
 		return true;
 	}
 	
+	// 分配各壓注區機率
 	private void SetRandomTimes() {
 		prob_.RandomPai();
 		for(int i = 0; i < 12; i++) {
@@ -116,7 +115,7 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 		return (Integer)channel.get(ActorKeys.MEMBER_ID);
 	}
 	
-	private GClonePlayer GetGClonePlayer(Integer id)  {
+	private GClonePlayer GetGClonePlayer(Integer id) {
 		return ActorManage.GetClonePlayer(id);
 	}
 	
@@ -129,14 +128,4 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 				   CGJourneyBarStatus.JOURNEYBAR_STATUS_BET_TIME);
 	}
 	
-	private void LoadProbBankRecord() {
-		prob_.LoadBankRecord(this_group_.CSGrpNo_,
-							 this_group_.GameMode,
-							 this_group_.PointRatioL,
-							 this_group_.PointRatioR);
-	}
-	
-	private void InitProbData() {
-		prob_.InitData(this_group_);		
-	}
 }
