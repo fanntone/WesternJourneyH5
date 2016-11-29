@@ -9,6 +9,16 @@ import java.security.NoSuchAlgorithmException;
 
 public class CGThisGroup {
 	
+	private static CGThisGroup  instance = null;
+	
+	public static synchronized  CGThisGroup getInstance() {
+		if ( instance == null ) {
+			instance = new CGThisGroup();
+		}
+		
+		return instance;
+	}
+	
 	public CGThisGroup() {
 		GetGroupHistoryFromRedis();
 		ReGetBounsAndSampleTotalBetValue();
