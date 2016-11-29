@@ -84,11 +84,8 @@ public class Logic_CGGSLBet implements CommonLogic {
 		BetTwelveSlot(iTotalPoint);
 		BetBankPlayerSlot();
 		
-		SaveTurnStopRecord(this_group_.CSGrpNo_,
-						   this_group_.GameMode);
-		AddGrpInfoRecord(iNowWinPoint,
-						 this_group_.CSGrpNo_,
-						 this_group_.GameMode);
+		SaveTurnStopRecord(this_group_.ThisGrpNo_);
+		AddGrpInfoRecord(iNowWinPoint, this_group_.ThisGrpNo_);
 		SetPlayGroupStates(player);
 		return true;
 	}
@@ -110,11 +107,11 @@ public class Logic_CGGSLBet implements CommonLogic {
 		return player.get(ActorKeys.PLAYER_STATES);
 	}
 
-	public boolean SaveTurnStopRecord(int group_index, int group_mode) {
+	public boolean SaveTurnStopRecord(int group_index) {
 		return true;
 	}
 	
-	public boolean AddGrpInfoRecord(int win_lose, int group_index, int group_mode) {
+	public boolean AddGrpInfoRecord(int win_lose, int group_index) {
 		return true;
 	}
 	

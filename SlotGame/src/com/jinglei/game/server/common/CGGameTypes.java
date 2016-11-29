@@ -55,7 +55,8 @@ public enum CGGameTypes {
 	GAME_TYPE_GREYHOUNDRACING(50),								///< 3D賽狗49
 	GAME_TYPE_YINGCHOYSUN(51),									///< 迎財神50
 	GAME_TYPE_FISHONLINE(52),									///< 多人捕魚51
-	GAME_TYPE_MAX(53);
+	GAME_TYPE_JOURNEYBAR_H5(53),									///< 西遊爭霸(H5)53
+	GAME_TYPE_MAX(99);
 	
     private int value_;
 

@@ -50,7 +50,7 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 	
 	private CGGSLTableInfo receive_ = new CGGSLTableInfo();
 	private CGGCliTableInfo responses_ = new CGGCliTableInfo();
-	private CGThisGroup this_group_ = new CGThisGroup();
+	//private CGThisGroup this_group_ = new CGThisGroup();
 	private CGJourneyBarProb prob_ = new CGJourneyBarProb();
 	
 	private void OnReceive(byte[] packet_data) {
@@ -78,37 +78,32 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 				
 		if(this.receive_.Auto_ != 1)
 			return false;
-		
-		LoadHistoryRecord();
+
 		SetResponsesData();
-		SetRandomTimes();
 		SetPlayGroupStates(player);
 				
 		return true;
 	}
 	
-	// 前八次開獎紀錄	
-	private boolean LoadHistoryRecord() {
-		return true;
-	}
-	
-	// 分配各壓注區機率
-	private void SetRandomTimes() {
-		prob_.RandomPai();
-		for(int i = 0; i < 12; i++) {
-			this.responses_.iRandomTimes_[i] = prob_.CliRandomTimesResult_.iRandomTimes_[i];
-		}
-	}
-	
 	private void SetResponsesData() {
-		this.responses_.SeatNo_ = this_group_.CSGrpNo_;
-		this.responses_.iUserPoint_ = prob_.GetRatioPoint(1);
-		this.responses_.iJPBonus_ = this_group_.pJPBonusList[0];
-		this.responses_.iPlatformJpBouns_ = this_group_.pJPBonusList[0];
-		this.responses_.iTurnStop_ = 1;
-		this.responses_.PairerMinBet_ = 1000;
-		this.responses_.PairerMaxBet_ = 80000;
-		this.responses_.NationPointRatio_ = 3;
+		this.responses_.RunGrpBeginTime_ = CGThisGroup.RunGrpBeginTime_;
+		this.responses_.RunGrpEndTime_ = CGThisGroup.RunGrpEndTime_;
+		this.responses_.ThisGrpNo_ = CGThisGroup.ThisGrpNo_;
+		this.responses_.GrpType_= CGThisGroup.GrpType_;
+		this.responses_.CoinType_ = CGThisGroup.CoinType_;
+		this.responses_.GameType_ = CGThisGroup.GameType_;
+		this.responses_.BetRange_ = CGThisGroup.BetRange_;
+		this.responses_.MaxBetLimit_= CGThisGroup.MaxBetLimit_;	
+		this.responses_.GrpUniID_ = CGThisGroup.GrpUniID_;
+		this.responses_.JPBonusList_ = CGThisGroup.JPBonusList_;
+		this.responses_.BounsHistoryRecord_ = CGThisGroup.BounsHistoryRecord_;
+		this.responses_.SampleHistoryRecord_= CGThisGroup.SampleHistoryRecord_;
+		this.responses_.BounsTotalBet_ = CGThisGroup.BounsTotalBet_;
+		this.responses_.SampleTotalBet_ = CGThisGroup.SampleTotalBet_;
+		this.responses_.RandomPay_ = CGThisGroup.RandomPay_;
+		this.responses_.NationCoinType_= CGThisGroup.NationCoinType_;
+		this.responses_.MaxBetValue_ = CGThisGroup.MaxBetValue_;
+		this.responses_.MinBetValue_= CGThisGroup.MinBetValue_;	
 	}
 
 	private Integer GetGroupId(NettyClientChannel channel) {
