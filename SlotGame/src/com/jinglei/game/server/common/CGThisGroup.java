@@ -20,10 +20,10 @@ public class CGThisGroup {
 	}
 	
 	public CGThisGroup() {
+		// 開新局的時候要再呼叫下面幾個function
 		GetGroupHistoryFromRedis();
 		ReGetBounsAndSampleTotalBetValue();
 		RandomPai();
-		//ThisGrpNo_ = InitThisGroupId();
 	}
 
 	// 開局時間
@@ -64,7 +64,8 @@ public class CGThisGroup {
 	public static int MinBetValue_ = 1;
 	// 各格子隨機賠率
 	public static int[] RandomPay_ = new int [12];
-	
+	// 局狀態
+	public static int States_ = CGJourneyBarStatus.JOURNEYBAR_STATUS_WAIT_PLAY.GetValue();
 	
 	public void GetGroupHistoryFromRedis() {
 		// set HistoryRecord
@@ -115,6 +116,10 @@ public class CGThisGroup {
 	}
 	
 	public void RandomPai() {
+		//0:孫悟空-紅,  1:孫悟空-綠,  2:孫悟空-黃
+		//3:沙悟淨-紅,  4:沙悟淨-綠,  5:沙悟淨-黃 
+		//6:牛魔王-紅,  7:牛魔王-綠,  8:牛魔王-黃
+		//9:紅孩兒-紅, 10:紅孩兒-綠, 11:紅孩兒-黃 )
 		//亂數分配孫悟空3區的賠率  25~(25+21)
 		SetOdds(0, 25, 22); 
 		//亂數分配沙悟淨3區的賠率  12~(12+11)

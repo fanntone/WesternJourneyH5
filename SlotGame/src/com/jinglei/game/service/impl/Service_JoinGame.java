@@ -66,7 +66,7 @@ public class Service_JoinGame extends Service {
 					break _SERVICE_ERROR_;					
 				}
 				
-				NettyClientChannel  player_channel 	  = ActorManage.getChannel(channel_hashcode, false);
+				NettyClientChannel  player_channel = ActorManage.getChannel(channel_hashcode, false);
 				
 				if (player_channel == null ) {
 					SysLog.PrintError(String.format("[Service:%s] Channel Hashcode:%d Player Channel is NULL....!!",getServiceName(),channel_hashcode));

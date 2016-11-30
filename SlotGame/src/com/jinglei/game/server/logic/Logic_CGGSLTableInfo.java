@@ -6,9 +6,6 @@ import java.nio.charset.StandardCharsets;
 import com.alibaba.fastjson.JSON;
 import com.jinglei.channel.NettyClientChannel;
 import com.jinglei.game.SysLog;
-import com.jinglei.game.attribute.ActorKeys;
-import com.jinglei.game.attribute.impl.GClonePlayer;
-import com.jinglei.game.manage.ActorManage;
 import com.jinglei.game.server.common.CGJourneyBarStatus;
 import com.jinglei.game.server.common.CGThisGroup;
 import com.jinglei.packets.ctos.CGGSLTableInfo;
@@ -63,19 +60,14 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 		channel.writeJSON(json2string);
 	}
 	
-	private boolean OnPerformLogic(NettyClientChannel channel) {				
-		GClonePlayer player = GetGClonePlayer(GetGroupId(channel));
-		String states = GetPlayGroupStates(player);
-		
-		if( states == null || Integer.parseInt(states, 10) != CGJourneyBarStatus.JOURNEYBAR_STATUS_WAIT_PLAY.GetValue())
+	private boolean OnPerformLogic(NettyClientChannel channel) {
+		if( CGThisGroup.States_ != CGJourneyBarStatus.JOURNEYBAR_STATUS_WAIT_PLAY.GetValue())
 			return false;
 				
 		if(this.receive_.Auto_ != 1)
 			return false;
 
-		SetResponsesData();
-		SetPlayGroupStates(player);
-				
+		SetResponsesData();		
 		return true;
 	}
 	
@@ -99,22 +91,8 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 		this.responses_.MaxBetValue_ = CGThisGroup.MaxBetValue_;
 		this.responses_.MinBetValue_= CGThisGroup.MinBetValue_;	
 	}
-
-	private Integer GetGroupId(NettyClientChannel channel) {
-		return (Integer)channel.get(ActorKeys.MEMBER_ID);
-	}
 	
-	private GClonePlayer GetGClonePlayer(Integer id) {
-		return ActorManage.GetClonePlayer(id);
-	}
-	
-	private String GetPlayGroupStates(GClonePlayer player) {
-		return player.get(ActorKeys.PLAYER_STATES);
-	}
-	
-	private void SetPlayGroupStates(GClonePlayer player) {
-		player.put(ActorKeys.PLAYER_STATES,
-				   CGJourneyBarStatus.JOURNEYBAR_STATUS_BET_TIME);
-	}
-	
+//	private GClonePlayer GetGClonePlayer(Integer id) {
+//		return ActorManage.GetClonePlayer(id);
+//	}	
 }

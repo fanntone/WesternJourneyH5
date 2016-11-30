@@ -25,8 +25,8 @@ public class CGGSLBet implements JSONBean {
 //		int				iTotalBetPoint;						//押注總金額
 //	};
 	
-	public int[] iBetSum_ = new int[12];
-	public int[] iBetBankPlayerTie_ = new int[3];
+	public int[] SampleBetSum_ = new int[12];
+	public int[] BounsBetSum = new int[3];
 	public int iTotalBetPoint_ = 0;
 	
 }
