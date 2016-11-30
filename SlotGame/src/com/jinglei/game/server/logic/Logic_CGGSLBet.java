@@ -8,14 +8,11 @@ import com.jinglei.game.SysLog;
 import com.jinglei.game.attribute.ActorKeys;
 import com.jinglei.game.attribute.impl.GClonePlayer;
 import com.jinglei.game.manage.ActorManage;
-import com.jinglei.game.server.common.CGGameGrpModes;
 import com.jinglei.game.server.common.CGJourneyBarProb;
 import com.jinglei.game.server.common.CGJourneyBarStatus;
 import com.jinglei.game.server.common.CGThisGroup;
 import com.jinglei.packets.ctos.CGGSLBet;
-import com.jinglei.packets.ctos.CGGSLTableInfo;
 import com.jinglei.packets.stoc.CGGCliResult;
-import com.jinglei.packets.stoc.CGGCliTableInfo;
 import com.jinglei.server.logic.CommonLogic;
 
 public class Logic_CGGSLBet implements CommonLogic {
@@ -51,7 +48,6 @@ public class Logic_CGGSLBet implements CommonLogic {
 	
 	public CGGSLBet receive_ = new CGGSLBet();
 	public CGGCliResult responses_ = new CGGCliResult();
-	public CGThisGroup this_group_ = new CGThisGroup();
 	CGJourneyBarProb prob_ = new CGJourneyBarProb();
 	
 	
@@ -84,8 +80,8 @@ public class Logic_CGGSLBet implements CommonLogic {
 		BetTwelveSlot(iTotalPoint);
 		BetBankPlayerSlot();
 		
-		SaveTurnStopRecord(this_group_.ThisGrpNo_);
-		AddGrpInfoRecord(iNowWinPoint, this_group_.ThisGrpNo_);
+		SaveTurnStopRecord(CGThisGroup.ThisGrpNo_);
+		AddGrpInfoRecord(iNowWinPoint, CGThisGroup.ThisGrpNo_);
 		SetPlayGroupStates(player);
 		return true;
 	}

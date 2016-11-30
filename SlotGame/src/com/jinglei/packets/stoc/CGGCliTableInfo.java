@@ -48,5 +48,4 @@ public class CGGCliTableInfo implements JSONBean {
 	public int MaxBetValue_ = 0;
 	public int MinBetValue_ = 0;
 	
-	
 }

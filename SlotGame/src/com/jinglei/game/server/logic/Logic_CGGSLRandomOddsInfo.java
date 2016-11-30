@@ -1,15 +1,14 @@
 package com.jinglei.game.server.logic;
 
 import java.nio.charset.StandardCharsets;
-
 import com.alibaba.fastjson.JSON;
 import com.jinglei.channel.NettyClientChannel;
 import com.jinglei.game.SysLog;
-import com.jinglei.packets.ctos.CGGSLRandomTimesInfo;
-import com.jinglei.packets.stoc.CGGCliRandomTimesResult;
+import com.jinglei.packets.ctos.CGGSLRandomOddsInfo;
+import com.jinglei.packets.stoc.CGGCliRandomOddsResult;
 import com.jinglei.server.logic.CommonLogic;
 
-public class Logic_CGGSLRandomTimesInfo implements CommonLogic {
+public class Logic_CGGSLRandomOddsInfo implements CommonLogic {
 
 	@Override
 	public void executeLogic(byte[] packet_data, NettyClientChannel channel) {
@@ -18,10 +17,10 @@ public class Logic_CGGSLRandomTimesInfo implements CommonLogic {
 			
 			if ( packet_data != null && channel != null ) {
 				String json_text = new String(packet_data, StandardCharsets.UTF_8);
-				CGGSLRandomTimesInfo receive = JSON.parseObject(json_text, CGGSLRandomTimesInfo.class);
+				CGGSLRandomOddsInfo receive = JSON.parseObject(json_text, CGGSLRandomOddsInfo.class);
 				
 				if ( receive != null && channel != null) {
-					CGGCliRandomTimesResult responses = new CGGCliRandomTimesResult();
+					CGGCliRandomOddsResult responses = new CGGCliRandomOddsResult();
 					
 					if ( responses != null ) {
 						String json2string = JSON.toJSONString(responses,
@@ -51,7 +50,7 @@ public class Logic_CGGSLRandomTimesInfo implements CommonLogic {
 	@Override
 	public CommonLogic newInstance() {
 		// TODO Auto-generated method stub
-		return new Logic_CGGSLRandomTimesInfo();
+		return new Logic_CGGSLRandomOddsInfo();
 	}
 
 }

@@ -2,7 +2,7 @@ package com.jinglei.packets.ctos;
 
 import com.jinglei.server.logic.JSONBean;
 
-public class CGGSLRandomTimesInfo implements JSONBean {
+public class CGGSLRandomOddsInfo implements JSONBean {
 
 	@Override
 	public String getName() {
@@ -10,7 +10,7 @@ public class CGGSLRandomTimesInfo implements JSONBean {
 		return new String("CGGSLRandomTimesInfo");
 	}
 	
-	public CGGSLRandomTimesInfo() {
+	public CGGSLRandomOddsInfo() {
 		
 	}
 	
@@ -19,14 +19,6 @@ public class CGGSLRandomTimesInfo implements JSONBean {
 //		int			    Auto;								// 0:不要  1:要  (填入1即可)
 //	};
 	
-	private int Auto_ = 1;
-	
-	public int getAuto() {
-		return this.Auto_;
-	}
-	
-	public void setAuto(int value) {
-		this.Auto_ = value;
-	}
+	public int Auto_ = 1;
 
 }

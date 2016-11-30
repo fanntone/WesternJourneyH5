@@ -23,7 +23,7 @@ public class CGThisGroup {
 		GetGroupHistoryFromRedis();
 		ReGetBounsAndSampleTotalBetValue();
 		RandomPai();
-		ThisGrpNo_ = InitThisGroupId();
+		//ThisGrpNo_ = InitThisGroupId();
 	}
 
 	// 開局時間
@@ -31,7 +31,7 @@ public class CGThisGroup {
 	// 完局時間
 	public static long RunGrpEndTime_ = System.currentTimeMillis() + 2 * (1000);
 	// 局編號(SHA-1)
-	public static int ThisGrpNo_ = 0;
+	public static int ThisGrpNo_ = InitThisGroupId();
 	// 遊戲型態為動態人數
 	public static int GrpType_ = CGGrpTypes.GRP_TYPE_DYN_PLAYERS.GetValue();
 	// 遊戲幣別(真錢/假錢)
@@ -88,7 +88,7 @@ public class CGThisGroup {
 		}		
 	}
 	
-	private static String hexEncode(byte[] aInput) {
+	public static String hexEncode(byte[] aInput) {
 		StringBuilder result = new StringBuilder();
 	    char[] digits = {'0', '1', '2', '3', '4','5','6','7','8','9','a','b','c','d','e','f'};
 	    for (int idx = 0; idx < aInput.length; ++idx) {
@@ -99,13 +99,14 @@ public class CGThisGroup {
 	    return result.toString();
 	}
 	
-	private int InitThisGroupId() {
+	public static int InitThisGroupId() {
 	    try {
 	    	SecureRandom prng = SecureRandom.getInstance("SHA1PRNG");
 	    	String randomNum = new Integer(prng.nextInt()).toString();
 	    	MessageDigest sha = MessageDigest.getInstance("SHA-1");
 	    	byte[] result =  sha.digest(randomNum.getBytes());
-	    	return Integer.parseInt(hexEncode(result), 10);
+	    	int code = Integer.parseInt(hexEncode(result), 10);
+	    	return code;
 	    }
 	    catch (NoSuchAlgorithmException ex) {
 	    	SysLog.PrintInfo("Logic_CGGSLTableInfo Run finally!!");

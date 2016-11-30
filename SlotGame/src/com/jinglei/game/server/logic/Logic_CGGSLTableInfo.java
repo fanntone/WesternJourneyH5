@@ -9,15 +9,11 @@ import com.jinglei.game.SysLog;
 import com.jinglei.game.attribute.ActorKeys;
 import com.jinglei.game.attribute.impl.GClonePlayer;
 import com.jinglei.game.manage.ActorManage;
-import com.jinglei.game.server.common.CGGameGrpModes;
-import com.jinglei.game.server.common.CGJourneyBarProb;
 import com.jinglei.game.server.common.CGJourneyBarStatus;
 import com.jinglei.game.server.common.CGThisGroup;
 import com.jinglei.packets.ctos.CGGSLTableInfo;
 import com.jinglei.packets.stoc.CGGCliTableInfo;
 import com.jinglei.server.logic.CommonLogic;
-
-import java.util.Random;
 
 public class Logic_CGGSLTableInfo implements CommonLogic {
 
@@ -50,8 +46,6 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 	
 	private CGGSLTableInfo receive_ = new CGGSLTableInfo();
 	private CGGCliTableInfo responses_ = new CGGCliTableInfo();
-	//private CGThisGroup this_group_ = new CGThisGroup();
-	private CGJourneyBarProb prob_ = new CGJourneyBarProb();
 	
 	private void OnReceive(byte[] packet_data) {
 		String json_text = new String(packet_data,
