@@ -1,12 +1,12 @@
 package com.jinglei.game.server.common;
 
-public class CGJPBouns {
+public class CGJPBonus {
 	
-	private static CGJPBouns  instance = null;
+	private static CGJPBonus  instance = null;
 	
-	public static synchronized  CGJPBouns getInstance() {
+	public static synchronized  CGJPBonus getInstance() {
 		if ( instance == null ) {
-			instance = new CGJPBouns();
+			instance = new CGJPBonus();
 		}
 		
 		return instance;
