@@ -13,7 +13,8 @@ public class JedisPoolUtils {
         rb=ResourceBundle.getBundle("jdbc");
     }
 
-    private static class Singleton{
+    @SuppressWarnings("unused")
+	private static class Singleton{
         private static final JedisPool INSTANCE =new JedisPoolBuilder().setPoolName("pool").setTimeout(2000).setUrl(rb.getString("redis.url")).buildPool();
     }
 

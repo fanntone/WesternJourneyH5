@@ -5,8 +5,6 @@ import com.jinglei.game.SysLog;
 import com.jinglei.game.attribute.ActorKeys;
 import com.jinglei.game.attribute.GPlayerSession;
 import com.jinglei.channel.NettyClientChannel;
-import com.jinglei.game.manage.UtilTimeManage;
-
 import io.netty.util.internal.chmv8.ConcurrentHashMapV8;
 /*
  * 
@@ -230,6 +228,7 @@ public class GClonePlayer implements GPlayerSession {
 		return this.get(key_name,true);
 	}
 	
+	@SuppressWarnings("unchecked")
 	private <T> T get(String key_name, boolean if_remove) 
 	//private Object get(String key_name, boolean if_remove)
 	{

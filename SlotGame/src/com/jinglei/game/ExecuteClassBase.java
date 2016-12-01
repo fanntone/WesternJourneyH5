@@ -1,10 +1,5 @@
 package com.jinglei.game;
 
-import java.util.List;
-
-import com.jinglei.game.attribute.impl.GClonePlayer;
-import com.jinglei.channel.NettyClientChannel;
-
 /*
 * 處理 相關邏輯  基礎繼承 class
 * @title   				ExecuteClassBase

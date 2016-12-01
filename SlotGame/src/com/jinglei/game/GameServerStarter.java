@@ -65,6 +65,7 @@ public class GameServerStarter
 	/**
 	 * @param args
 	 */
+	@SuppressWarnings("unused")
 	public static void main(String[] args)
 	{	
 		String  strError = "Unknown error";			
@@ -183,7 +184,6 @@ public class GameServerStarter
 							sp.StartServer(port_number, 32, 32);
 						}
 						else {						
-							// StartServer
 							sp.startServer(getPort(args), 32, 32);
 						}
 					}

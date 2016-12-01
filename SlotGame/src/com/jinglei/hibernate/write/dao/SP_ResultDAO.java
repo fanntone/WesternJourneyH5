@@ -4,7 +4,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.jinglei.hibernate.HibernateManagement;
-import com.jinglei.hibernate.read.account_data;
 import com.jinglei.hibernate.write.SP_Result;
 import com.jinglei.game.SysLog;
 

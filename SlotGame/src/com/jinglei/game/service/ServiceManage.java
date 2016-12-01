@@ -1,13 +1,9 @@
 package com.jinglei.game.service;
 
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
-
-import com.jinglei.game.DevelopmentVersion;
 import com.jinglei.game.SysLog;
-import com.jinglei.game.manage.UtilTimeManage;
 
 /*
  * 					Server 服務 管理
@@ -263,13 +259,11 @@ public class ServiceManage {
 			_WORK_ERROR_: {				
 				try {					
 					int nCount = 0;
-					int nExecRtn = 0;
 					while (true) {
 						Service  serviceExecute = ServiceManage.getService();
 						
 						if ( serviceExecute != null ) {	
 							SysLog.PrintDebug("["+getManageName()+"] Run Service :"+serviceExecute.getServiceName()+"...!!!" );
-							nExecRtn = serviceExecute.Execute();							
 							//清除
 							//serviceExecute.clearAttachment();
 							serviceExecute =  null;

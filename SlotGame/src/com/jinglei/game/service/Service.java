@@ -3,7 +3,6 @@ package com.jinglei.game.service;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.jinglei.game.SysLog;
 import com.jinglei.game.manage.CycleCostUnit;
 import com.jinglei.game.manage.UtilTimeManage;
 
@@ -152,7 +151,7 @@ public abstract class Service {
 	 * @param key_name String key 的名稱.
 	 * @return 型別為 T 的 value 物件. 如果沒有取到, 會傳回 null.
 	 *****************************************************************************/
-	@SuppressWarnings("unused")
+	@SuppressWarnings({ "unchecked" })
 	public <T> T get(String key_name,boolean[] check_code) 
 	{
 		if (key_name==null || key_name.equals("")) {
@@ -173,8 +172,9 @@ public abstract class Service {
 	
 	public void printOutTheCurrentMap(){
 		
-		Iterator it = mapAttachment.entrySet().iterator();
+		Iterator<?> it = mapAttachment.entrySet().iterator();
 		while (it.hasNext()) {
+			@SuppressWarnings("rawtypes")
 			Map.Entry pair = (Map.Entry)it.next();
 			System.out.println(String.format("service[%s] key:[%s] value:[%s]",this.getServiceName(),pair.getKey() ,pair.getValue()));			 
 		}

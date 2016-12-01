@@ -1,24 +1,13 @@
 package com.jinglei.game.manage;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.jinglei.game.DevelopmentVersion;
 import com.jinglei.game.SysLog;
-import com.jinglei.game.attribute.ActorKeys;
-import com.jinglei.game.attribute.impl.GClonePlayer;
-
-import com.jinglei.channel.NettyClientChannel;
-
-import com.jinglei.game.server.common.StatusCode;
 import com.excel.impl.ExcelData;
 import com.excel.impl.ExcelRecord;
 import com.excel.impl.ExcelTable;
-
-import com.jinglei.game.setting.DataComposeKey;
 
 /*
  * 					伺服器設定檔
@@ -30,10 +19,6 @@ import com.jinglei.game.setting.DataComposeKey;
  */
 public class SettingManage {
 	
-	/*
-	 * Excel 資料表
-	 */
-	private static int maxBattleExperience = 0;
 	private static ExcelData    gameExcel = null;
 	
 	public static ExcelData    getGameExcel() {
@@ -209,14 +194,10 @@ public class SettingManage {
 				//ExcelTable      setting =	SettingManage.getGameExcel().getTable(2);
 				ExcelTable      setting =	SettingManage.getGameExcel().getTableName("SERVER_SETTING");
 				if (setting != null ) {
-					int param_id_idx 		= setting.getColKeyIndex("PARAMETER_ID");
-					Integer param_id     	= 0;
 					int param_code_idx 		= setting.getColKeyIndex("PARAMETER_CODE");
 					String  param_code   	= "N/A";
 					int param_name_idx 		= setting.getColKeyIndex("PARAMETER_NAME");
 					String  param_name   	= "N/A";
-					int param_type_idx 		= setting.getColKeyIndex("PARAMETER_TYPE");
-					Integer param_type   	= 0;
 					int param_value_idx 	= setting.getColKeyIndex("PARAMETER_VALUE");
 					Integer  param_value 	= 0;
 					
@@ -229,10 +210,8 @@ public class SettingManage {
 						{
 							ExcelRecord record = entry.getValue(); 
 							if ( record != null && entry.getKey() >= 1 ) {
-								param_id 			= (int) record.getRowInteger(param_id_idx);			// 參數代碼
 								param_code  	 	= record.getRowString(param_code_idx);				// 參數編碼
 								param_name  	 	= record.getRowString(param_name_idx);				// 參數名稱
-								param_type 			= (int) record.getRowInteger(param_type_idx);		// 參數類型
 								param_value 		= (int) record.getRowInteger(param_value_idx);		// 參數 設定值
 								
 								

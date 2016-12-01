@@ -1,7 +1,5 @@
 package com.jinglei.jedis;
 
-import java.net.InetSocketAddress;
-
 import com.alibaba.fastjson.JSON;
 import com.jinglei.game.DevelopmentVersion;
 import com.jinglei.game.GameServerStarter;
@@ -98,8 +96,6 @@ public class RedisManager {
 	  private static JedisPool    jedisPool			=	null;
 	  
 	  private static JedisPoolConfig config 		= 	null;
-	  
-	  private static JedisTemplate  jedisTemplate   =  null;
 	  
 	  private static String   redis_service_ip   = "localhost";
 	  private static int	  redis_service_port = 6379;

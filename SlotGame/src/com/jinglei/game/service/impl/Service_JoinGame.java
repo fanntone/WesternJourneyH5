@@ -49,6 +49,7 @@ public class Service_JoinGame extends Service {
 		return new String("Service_JoinGame()");
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public int Execute() {
 		SysLog.PrintError(String.format("[Service:%s]  Run Date:%d  Runing Begin...!!!", getServiceName(),UtilTimeManage.getCurrentTimeToNumber()));
@@ -57,8 +58,6 @@ public class Service_JoinGame extends Service {
 			// _SERVICE_ERROR_ Begin
 			_SERVICE_ERROR_: {	
 				boolean[] check_bool = { false };
-				int[]     check_code = { 0 };
-				
 				Integer	channel_hashcode = get(ServiceKeys.CHANNEL_HASH_CODE,check_bool);
 				
 				if ( channel_hashcode == null || !check_bool[0]) {

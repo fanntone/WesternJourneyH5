@@ -1,8 +1,6 @@
 package com.jinglei.hibernate.read;
 
 import java.io.Serializable;
-import java.util.Date;
-
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +11,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import com.jinglei.game.manage.UtilTimeManage;
 
 
 

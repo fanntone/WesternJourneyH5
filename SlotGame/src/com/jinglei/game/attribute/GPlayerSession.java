@@ -102,6 +102,7 @@ public interface GPlayerSession {
 	 * @param key_name String key 的名稱.
 	 * @param value_obj 型別為 T 的 value 物件.
 	 *****************************************************************************/
+	@SuppressWarnings("hiding")
 	public abstract <T>  boolean put(String key_name,T value_obj);
 	
 	/******************************************************************************
@@ -109,6 +110,7 @@ public interface GPlayerSession {
 	 * @param key_name String key 的名稱.
 	 * @param value_obj 型別為 T 的 value 物件.
 	 *****************************************************************************/
+	@SuppressWarnings("hiding")
 	public abstract <T>  boolean Insert(String key_name,T value_obj);
 	
 	/******************************************************************************
@@ -116,6 +118,7 @@ public interface GPlayerSession {
 	 * @param key_name String key 的名稱.
 	 * @return 型別為 T 的 value 物件. 如果沒有取到, 會傳回 null.
 	 *****************************************************************************/
+	@SuppressWarnings("hiding")
 	public abstract <T> T get(String key_name);
 	
 	/******************************************************************************
@@ -123,6 +126,7 @@ public interface GPlayerSession {
 	 * @param key_name String key 的名稱.
 	 * @return 型別為 T 的 value 物件. 如果沒有取到, 會傳回 null.
 	 *****************************************************************************/
+	@SuppressWarnings("hiding")
 	public <T> T remove(String key_name);	
 	
 	/******************************************************************************
@@ -137,6 +141,7 @@ public interface GPlayerSession {
 	 * @param key_name String key 的名稱.
 	 * @return boolean true/false
 	 *****************************************************************************/		
+	@SuppressWarnings("hiding")
 	public abstract <T> boolean ContainsObject(String key,T value_obj);
 	
 	/******************************************************************************
@@ -145,5 +150,6 @@ public interface GPlayerSession {
 	 * @param arg 2 T value_obj  檢查物值
 	 * @return 型別為 T 的 value 物件. 如果沒有取到, 會傳回 null.
 	  *****************************************************************************/    
-	 public abstract <T> T getContainsObject(String key,T value_obj);
+	 @SuppressWarnings("hiding")
+	public abstract <T> T getContainsObject(String key,T value_obj);
 }

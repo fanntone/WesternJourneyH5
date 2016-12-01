@@ -9,7 +9,7 @@ public class JedisDirectPool extends JedisPool {
     }
 
     public JedisDirectPool(String poolName, HostAndPort address, ConnectionInfo connectionInfo, JedisPoolConfig config) {
-        initInternalPool(address, connectionInfo, config);
+        initInternalPool(address, connectionInfo, config, poolName);
         this.poolName = poolName;
     }
 }

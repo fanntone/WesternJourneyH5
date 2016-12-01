@@ -13,7 +13,7 @@ public class ConnectionInfo {
 
     public ConnectionInfo(int database, String password, int timeout) {
         this.timeout = timeout;
-        this.password = password;
+        ConnectionInfo.password = password;
         this.database = database;
     }
 
@@ -30,7 +30,7 @@ public class ConnectionInfo {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        ConnectionInfo.password = password;
     }
 
     public int getTimeout() {

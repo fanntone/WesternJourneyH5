@@ -5,8 +5,6 @@ import java.util.concurrent.ExecutionException;
 public class JedisTest {
     public static void main(String[] args) throws ExecutionException {
 
-        String url="direct://192.168.200.128:6379?poolSize=500";
-
         JedisPool jedisPool=JedisPoolUtils.getJedisPopol(0);
         JedisPool jedisPool2=JedisPoolUtils.getJedisPopol(1);
         JedisPool jedisPool3=JedisPoolUtils.getJedisPopol(2);

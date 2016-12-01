@@ -11,6 +11,7 @@ public class UtilString {
 	 * @param string
 	 * @return
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Vector StringToVecot(String s){
 		Vector v = new Vector();
 		if(s!=null){
@@ -24,6 +25,7 @@ public class UtilString {
 		return v;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public static String VectorToString(Vector v){
 		StringBuffer result = null;
 		if(v!=null){

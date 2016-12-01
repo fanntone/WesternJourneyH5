@@ -208,7 +208,7 @@ public class GeoipManage {
 	private static final double EARTH_RADIUS = 6378137;  
 	private static final double RAD = Math.PI / 180.0;  
 	    
-	private static final double Perimeter = 24901; 
+	 
 	    
 	//The circumference of the earth is 24,901 miles.  
 	//地球的周長是24901英里。

@@ -31,8 +31,10 @@ public abstract class JedisPool extends Pool<Jedis> {
 
     /**
      * Initialize the internal pool with connection info and pool config.
+     * @param poolName 
      */
-    protected void initInternalPool(HostAndPort address, ConnectionInfo connectionInfo, JedisPoolConfig config) {
+    @SuppressWarnings({ "static-access", "rawtypes", "unchecked" })
+	protected void initInternalPool(HostAndPort address, ConnectionInfo connectionInfo, JedisPoolConfig config, String poolName) {
         this.poolName = poolName;
         this.address = address;
         this.connectionInfo = connectionInfo;
@@ -55,7 +57,8 @@ public abstract class JedisPool extends Pool<Jedis> {
     /**
      * Return a available jedis connection back to pool.
      */
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void returnResource(final Jedis resource) {
         if (resource != null) {
             resource.resetState();

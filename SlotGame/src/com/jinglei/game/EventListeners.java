@@ -2,17 +2,8 @@ package com.jinglei.game;
 
 import com.jinglei.game.attribute.ActorKeys;
 import com.jinglei.game.attribute.impl.GClonePlayer;
-
-//import com.jinglei.game.attribute.impl.GClonePlayer;
-
 import com.jinglei.channel.NettyClientChannel;
 import com.jinglei.game.manage.ActorManage;
-import com.jinglei.game.manage.UtilTimeManage;
-
-//import com.jinglei.game.service.Service;
-//import com.jinglei.game.service.ServiceKeys;
-//import com.jinglei.game.synchronize.SynchronizeExecuteEnum;
-//import com.jinglei.game.synchronize.SynchronizeManage;
 import com.jinglei.server.event.EventListener;
 
 /*
@@ -45,8 +36,6 @@ class ChannelInactive implements EventListener
 		try {
 			SysLog.PrintDebug(String.format("[ChannelInactive] Channel Hash Code:%d ...Inactive!!",channel.getHashCode()));
 			int[] check_code = { 0 };
-			int iNactivePlayerID = 0;
-			int  room_id = 0;
 			if ( channel != null ) {	
 				SysLog.PrintDebug("[EventListener.java] Channel Inactive - ChannelInactive");
 				GClonePlayer player = channel.get(ActorKeys.CLONE_PLAYER);				
@@ -57,9 +46,7 @@ class ChannelInactive implements EventListener
 //						SysLog.PrintDebug("[EventListener] Player:"+player.getPlayerID()+" ,Room_id:"+room_id);
 //					};					
 					
-					iNactivePlayerID = player.getMemberID();
-					check_code[0] = 0;
-					long logoutDate = UtilTimeManage.getCurrentTimeToNumber();				
+					check_code[0] = 0;				
 				}				
 
 				channel.close();

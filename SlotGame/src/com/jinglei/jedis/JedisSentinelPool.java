@@ -175,7 +175,7 @@ public class JedisSentinelPool extends JedisPool {
                         if (internalPool == null) {
                             logger.info("The internalPool {} is not init or the address had changed, init it now.",
                                     masterAddress);
-                            initInternalPool(masterAddress, masterConnectionInfo, masterPoolConfig);
+                            initInternalPool(masterAddress, masterConnectionInfo, masterPoolConfig, poolName);
                             poolInit.countDown();
                         }
 
@@ -190,7 +190,7 @@ public class JedisSentinelPool extends JedisPool {
                         // exception. change the logic later.
                         if (internalPool == null) {
                             HostAndPort masterAddress = new HostAndPort(RedisKeys.NO_ADDRESS_YET, 6379);
-                            initInternalPool(masterAddress, masterConnectionInfo, masterPoolConfig);
+                            initInternalPool(masterAddress, masterConnectionInfo, masterPoolConfig, poolName);
                             previousMasterAddress = masterAddress;
                         }
                         sleep(2000);
@@ -282,7 +282,7 @@ public class JedisSentinelPool extends JedisPool {
                             Integer.parseInt(switchMasterMsg[4]));
                     logger.info("Switch master to " + masterAddress);
                     destroyInternelPool();
-                    initInternalPool(masterAddress, masterConnectionInfo, masterPoolConfig);
+                    initInternalPool(masterAddress, masterConnectionInfo, masterPoolConfig, poolName);
                     previousMasterAddress = masterAddress;
                 }
             }

@@ -1,10 +1,7 @@
 package com.jinglei.game.manage;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 import com.jinglei.channel.NettyClientChannel;
 import com.jinglei.game.SysLog;
-import com.jinglei.game.attribute.ActorKeys;
 import com.jinglei.game.attribute.impl.GClonePlayer;
 
 import io.netty.util.internal.chmv8.ConcurrentHashMapV8;
