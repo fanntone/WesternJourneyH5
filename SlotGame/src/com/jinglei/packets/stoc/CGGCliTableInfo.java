@@ -30,7 +30,7 @@ public class CGGCliTableInfo implements JSONBean {
 	
 	public long RunGrpBeginTime_ = 0 ;
 	public long RunGrpEndTime_ = 0;
-	public int ThisGrpNo_ = 0;
+	public String ThisGrpNo_ = null;
 	public int GrpType_ = 0;
 	public int CoinType_ = 0;
 	public int GameType_ = 0;

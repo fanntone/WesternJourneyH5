@@ -58,6 +58,7 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 						"CGGCliTableInfo",
 						json2string));
 		channel.writeJSON(json2string);
+		SysLog.PrintInfo(json2string);
 	}
 	
 	private boolean OnPerformLogic(NettyClientChannel channel) {
@@ -92,7 +93,4 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 		this.responses_.MinBetValue_= CGThisGroup.MinBetValue_;	
 	}
 	
-//	private GClonePlayer GetGClonePlayer(Integer id) {
-//		return ActorManage.GetClonePlayer(id);
-//	}	
 }

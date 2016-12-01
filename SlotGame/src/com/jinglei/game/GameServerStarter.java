@@ -11,7 +11,7 @@ import com.jinglei.interceptor.ExecuteLogicInterceptor;
 import com.jinglei.game.manage.ActorManage;
 import com.jinglei.game.manage.GeoipManage;
 import com.jinglei.game.manage.SettingManage;
-
+import com.jinglei.game.server.common.CGThisGroup;
 import com.jinglei.server.event.EventListener;
 import com.jinglei.server.event.EventTypes;
 // logic package
@@ -137,7 +137,9 @@ public class GameServerStarter
 				}
 			
 				try
-				{						
+				{	
+					// Test 
+						CGThisGroup.getInstance();
 					// Listener  Channel 鋡怨酉������...		��蝺���  閮餃�channelMap 鋆��
 					sp.addListener(EventTypes.CHANNEL_REGISTERED, new EventListener[]{ 
 						new ChannelRegistered(),

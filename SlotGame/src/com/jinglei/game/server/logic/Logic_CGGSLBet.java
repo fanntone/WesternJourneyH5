@@ -109,6 +109,8 @@ public class Logic_CGGSLBet implements CommonLogic {
 	}
 	
 	public int GeyPlayerCurrnetPoints(NettyClientChannel channel) {
+		// 得到使用者資料要從MEMBER_ID去得到GClonePlayer物件,
+		// 接著才能從這個物件去存取ACCOUNT_DATA
 		int id = channel.get(ActorKeys.MEMBER_ID);
 		GClonePlayer player = GetGClonePlayer(id);
 		account_data adata = player.get(ActorKeys.ACCOUNT_DATA);

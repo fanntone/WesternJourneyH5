@@ -37,7 +37,7 @@ public interface DevelopmentVersion {
 	/*
 	 * 是否關閉  輸出資訊訊息
 	 */
-		public final boolean VERSION_PRINT_INFO = false;
+		public final boolean VERSION_PRINT_INFO = true;
 			
 	/*
 	 * 是否關閉  輸出偵錯訊息

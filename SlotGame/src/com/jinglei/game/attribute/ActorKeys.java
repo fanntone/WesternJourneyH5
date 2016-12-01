@@ -20,5 +20,7 @@ public class ActorKeys {
 	public static final String USER_LATITUDE = "USER_LATITUDE";	
 	// 玩家 經度 DOUBLE
 	public static final String USER_LONGITUDE = "USER_LONGITUD";		
+	
+	public static final String ThisGroupID = "ThisGroupID";
 
 }
