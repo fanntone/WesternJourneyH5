@@ -1,11 +1,8 @@
 package com.jinglei.game.server.logic;
 
-import java.nio.charset.StandardCharsets;
-
 import com.alibaba.fastjson.JSON;
 import com.jinglei.channel.NettyClientChannel;
 import com.jinglei.game.SysLog;
-
 import com.jinglei.packets.stoc.CGGCliUniteId;
 import com.jinglei.server.logic.CommonLogic;
 

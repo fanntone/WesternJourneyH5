@@ -5,16 +5,13 @@ import java.nio.charset.StandardCharsets;
 import com.alibaba.fastjson.JSON;
 import com.jinglei.channel.NettyClientChannel;
 import com.jinglei.game.SysLog;
-import com.jinglei.game.manage.ActorManage;
+
 import com.jinglei.game.manage.UtilTimeManage;
 import com.jinglei.game.service.Service;
 import com.jinglei.game.service.ServiceExecuteEnum;
 import com.jinglei.game.service.ServiceKeys;
 import com.jinglei.game.service.ServiceManage;
-import com.jinglei.packets.ctos.Guess;
 import com.jinglei.packets.ctos.JoinGame;
-import com.jinglei.packets.stoc.GuessResult;
-import com.jinglei.packets.stoc.JoinGameResult;
 import com.jinglei.server.logic.CommonLogic;
 
 
@@ -69,12 +66,9 @@ public class Logic_JoinGameResult implements CommonLogic {
 			SysLog.PrintError(String.format("[Logic:%s]  Run Date:%d  Channel HashCode:%d Runing Begin...!!!", getLogicName(),UtilTimeManage.getCurrentTimeToNumber(),channel.getHashCode()));
 			
 			if ( packet_data != null && channel != null ) {
-				
-				boolean[] check_bool = { false };
 				int[]     check_code = { 0 };
 				
-				String json_text = new String(packet_data, StandardCharsets.UTF_8);
-				
+				String json_text = new String(packet_data, StandardCharsets.UTF_8);			
 				JoinGame receive = JSON.parseObject(json_text, JoinGame.class);
 				if ( receive != null && channel != null) {					
 					Service exeService = ServiceManage.getServiceObjectByType(ServiceExecuteEnum.SEE_JoinGame.getType(),check_code);
