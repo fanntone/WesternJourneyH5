@@ -10,7 +10,7 @@ import com.jinglei.game.attribute.impl.GClonePlayer;
 import com.jinglei.game.manage.ActorManage;
 import com.jinglei.game.server.common.CGJPBonus;
 import com.jinglei.game.server.common.CGJourneyBarProb;
-import com.jinglei.game.server.common.CGJourneyBarStatus;
+import com.jinglei.game.server.common.CGGruupStates;
 import com.jinglei.game.server.common.CGThisGroup;
 import com.jinglei.hibernate.read.account_data;
 import com.jinglei.packets.ctos.CGGSLBet;
@@ -67,7 +67,7 @@ public class Logic_CGGSLBet implements CommonLogic {
 	}
 	
 	public boolean OnPerformLogic(NettyClientChannel channel) {
-		if( CGThisGroup.States_ != CGJourneyBarStatus.JOURNEYBAR_STATUS_BET_TIME.GetValue())
+		if( CGThisGroup.States_ != CGGruupStates.JOURNEYBAR_STATUS_BET_TIME.GetValue())
 			return false;
 		
 		OnPerformWinResult(channel);

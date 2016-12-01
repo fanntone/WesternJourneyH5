@@ -68,7 +68,7 @@ public class CGThisGroup {
 	// 各格子隨機賠率
 	public static int[] RandomPay_ = new int [12];
 	// 局狀態
-	public static int States_ = CGJourneyBarStatus.JOURNEYBAR_STATUS_WAIT_PLAY.GetValue();
+	public static int States_ = CGGruupStates.JOURNEYBAR_STATUS_WAIT_PLAY.GetValue();
 	
 	public void GetGroupHistoryFromRedis() {
 		// set HistoryRecord
