@@ -6,8 +6,6 @@ import java.util.Map.Entry;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 import org.hibernate.Session;
 
@@ -26,8 +24,6 @@ public class HibernateManagement {
 	 * Hibernate Mangement Instance
 	 */
 	private static HibernateManagement   instance = null;
-	
-	private static ScheduledExecutorService scheduler =  Executors.newScheduledThreadPool(2);
 	
 	/*
 	 *   HashMap<String, HibernateAdapter>    key->資料庫名稱    HibernateAdapter->OR-M 

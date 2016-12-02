@@ -1,17 +1,9 @@
 package com.jinglei.hibernate.read.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.mapping.Map;
-import org.hibernate.transform.Transformers;
-
 import com.jinglei.hibernate.HibernateManagement;
 import com.jinglei.hibernate.read.account_data;
 import com.jinglei.hibernate.read.member_points;
@@ -104,7 +96,8 @@ public class DataBaseReadDAO {
 	        		
 	        		//Query query = session.createSQLQuery(hql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP); 
 	        		
-	        		List  query_data = query.list();
+	        		@SuppressWarnings("rawtypes")
+					List  query_data = query.list();
 	        		
 	        		SysLog.PrintError(String.format("[AccountDataDAO]  query Data:%s....Succes!!",query_data.toString()));
 	        		
@@ -202,7 +195,8 @@ public class DataBaseReadDAO {
 	        	 * 			List<member_points> results = query.list();
 	        	 */
 	        		SQLQuery query = session.createSQLQuery(hql);        		
-	        		List  query_data = query.list();
+	        		@SuppressWarnings("rawtypes")
+					List  query_data = query.list();
 	        		
 	        		SysLog.PrintError(String.format("[AccountDataDAO]  query Data:%s....Succes!!",query_data.toString()));
 	        		

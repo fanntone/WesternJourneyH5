@@ -2,12 +2,10 @@ package com.jinglei.hibernate.write.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 import com.jinglei.hibernate.HibernateManagement;
-import com.jinglei.hibernate.read.account_data;
 import com.jinglei.hibernate.write.SP_Result;
 
 import com.jinglei.game.SysLog;
@@ -58,7 +56,7 @@ public class SP_DataBaseWriteDAO {
 	        	 */
 	        		SQLQuery query = session.createSQLQuery(hql);
 	        		
-	        		List  query_data = query.list();
+	        		List<?>  query_data = query.list();
 	        		
 	        		SysLog.PrintError(String.format("[SP_OnlineTypeChange]  query Data:%s....Succes!!",query_data.toString()));
 	        		
@@ -122,7 +120,7 @@ public class SP_DataBaseWriteDAO {
 	        	 */
 	        		SQLQuery query = session.createSQLQuery(hql);
 	        		
-	        		List  query_data = query.list();
+	        		List<?>  query_data = query.list();
 	        		
 	        		SysLog.PrintError(String.format("[SP_PasswordError]  query Data:%s....Succes!!",query_data.toString()));
 	        		
@@ -184,7 +182,7 @@ public class SP_DataBaseWriteDAO {
 	        	 */
 		        	SQLQuery query = session.createSQLQuery(hql);
 	        		
-	        		List  query_data = query.list();
+	        		List<?>  query_data = query.list();
 	        		
 	        		SysLog.PrintError(String.format("[SP_PasswordErrorReset]  query Data:%s....Succes!!",query_data.toString()));
 	        		
@@ -282,7 +280,7 @@ public class SP_DataBaseWriteDAO {
 	        	 */
 		        	SQLQuery query = session.createSQLQuery(hql);
 	        		
-	        		List  query_data = query.list();
+	        		List<?>  query_data = query.list();
 	        		
 	        		SysLog.PrintError(String.format("[SP_RecordTempAdd]  query Data:%s....Succes!!",query_data.toString()));
 	        		
