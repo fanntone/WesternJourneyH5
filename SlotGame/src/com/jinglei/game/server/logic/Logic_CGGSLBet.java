@@ -113,15 +113,22 @@ public class Logic_CGGSLBet implements CommonLogic {
 		SysLog.PrintInfo("GeyPlayerCurrnetPoints Begin");
 		// 得到使用者資料要從MEMBER_ID去得到GClonePlayer物件,
 		// 接著才能從這個物件去存取ACCOUNT_DATA
-		account_data accountData = DataBaseReadDAO.findAccountData("A0001");
-		SysLog.PrintInfo(accountData.getPoints().toString());
-		SysLog.PrintInfo("GeyPlayerCurrnetPoints End");
-		
+		// Unit test
+//		account_data accountData = DataBaseReadDAO.findAccountData("A0001");
+//		SysLog.PrintInfo(accountData.getPoints().toString());
+//		SysLog.PrintInfo("GeyPlayerCurrnetPoints End");	
 //		int id = channel.get(ActorKeys.MEMBER_ID);
 //		GClonePlayer player = GetGClonePlayer(id);
 //		account_data adata = player.get(ActorKeys.ACCOUNT_DATA);
 //	    adata.setPoints(accountData.getPoints());
-		return accountData.getPoints();
+//		return accountData.getPoints();
+		
+		// 正常流程
+		int id = channel.get(ActorKeys.MEMBER_ID);
+		GClonePlayer player = GetGClonePlayer(id);
+		account_data adata = player.get(ActorKeys.ACCOUNT_DATA);
+		SysLog.PrintInfo("GeyPlayerCurrnetPoints End");
+		return adata.getPoints();
 	}
 	
 	public int GetJPBonus() {
