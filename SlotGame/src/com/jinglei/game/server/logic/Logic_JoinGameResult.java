@@ -9,9 +9,7 @@ import com.jinglei.game.attribute.ActorKeys;
 import com.jinglei.game.attribute.impl.GClonePlayer;
 import com.jinglei.game.manage.ActorManage;
 import com.jinglei.game.manage.UtilTimeManage;
-import com.jinglei.game.probability.GBaseProbability;
 import com.jinglei.game.server.common.StatusCode;
-
 import com.jinglei.hibernate.read.account_data;
 import com.jinglei.hibernate.read.dao.DataBaseReadDAO;
 import com.jinglei.packets.ctos.JoinGame;
@@ -128,7 +126,7 @@ public class Logic_JoinGameResult implements CommonLogic {
 					}
 					
 					DataBaseReadDAO.getInstance();
-//					accountData = DataBaseReadDAO.findAccountData(receive.getAccount());
+					accountData = DataBaseReadDAO.findAccountData(receive.getAccount());
 					if ( accountData == null ) {
 						SysLog.PrintError(String.format("[Logic:%s] MySQL get account is NULL....Failure!!",getLogicName()));
 						break _LOGIC_ERROR_;
@@ -140,7 +138,7 @@ public class Logic_JoinGameResult implements CommonLogic {
 						player = new GClonePlayer(channel,accountData.getMemberID());						
 					}
 					else {
-						player.setMemberID(accountData.getMemberID());						
+						player.setMemberID(accountData.getMemberID());		
 					}
 					
 					/*

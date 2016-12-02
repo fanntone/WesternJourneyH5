@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 import com.alibaba.fastjson.JSON;
 import com.jinglei.channel.NettyClientChannel;
 import com.jinglei.game.SysLog;
-import com.jinglei.game.server.common.CGGruupStates;
+import com.jinglei.game.server.common.CGGroupStates;
 import com.jinglei.game.server.common.CGThisGroup;
 import com.jinglei.packets.ctos.CGGSLTableInfo;
 import com.jinglei.packets.stoc.CGGCliTableInfo;
@@ -58,17 +58,17 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 						"CGGCliTableInfo",
 						json2string));
 		channel.writeJSON(json2string);
-		SysLog.PrintInfo(json2string);
 	}
 	
 	private boolean OnPerformLogic(NettyClientChannel channel) {
-		if( CGThisGroup.States_ != CGGruupStates.JOURNEYBAR_STATUS_WAIT_PLAY.GetValue())
+		if( CGThisGroup.States_ != CGGroupStates.JOURNEYBAR_STATUS_WAIT_PLAY.GetValue())
 			return false;
 				
 		if(this.receive_.Auto_ != 1)
 			return false;
 
 		SetResponsesData();		
+		CGThisGroup.States_ = CGGroupStates.JOURNEYBAR_STATUS_BET_TIME.GetValue();
 		return true;
 	}
 	

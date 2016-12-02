@@ -10,10 +10,9 @@ import com.jinglei.game.attribute.impl.GClonePlayer;
 import com.jinglei.game.manage.ActorManage;
 import com.jinglei.game.server.common.CGJPBonus;
 import com.jinglei.game.server.common.CGProbability;
-import com.jinglei.game.server.common.CGGruupStates;
+import com.jinglei.game.server.common.CGGroupStates;
 import com.jinglei.game.server.common.CGThisGroup;
 import com.jinglei.hibernate.read.account_data;
-import com.jinglei.hibernate.read.dao.DataBaseReadDAO;
 import com.jinglei.packets.ctos.CGGSLBet;
 import com.jinglei.packets.stoc.CGGCliResult;
 import com.jinglei.server.logic.CommonLogic;
@@ -68,8 +67,9 @@ public class Logic_CGGSLBet implements CommonLogic {
 	}
 	
 	public boolean OnPerformLogic(NettyClientChannel channel) {
-		//if( CGThisGroup.States_ != CGGruupStates.JOURNEYBAR_STATUS_BET_TIME.GetValue())
-		//	return true;
+		// Unit test should comment it.
+		if( CGThisGroup.States_ != CGGroupStates.JOURNEYBAR_STATUS_BET_TIME.GetValue())
+			return false;
 		
 		OnPerformWinResult(channel);
 		OnPlayerRecordToDBServer();
@@ -81,6 +81,7 @@ public class Logic_CGGSLBet implements CommonLogic {
 	}
 	
 	public void OnPerformWinResult(NettyClientChannel channel) {
+		SysLog.PrintInfo("OnPerformWinResult Begin");
 		// 計算賽局機率與開獎結果, 然後丟給各別玩家
 		// 沒中獎示範
 		responses_.BetResult = 0;
@@ -102,27 +103,18 @@ public class Logic_CGGSLBet implements CommonLogic {
 										 responses_.GetJPBoints;
 
 		responses_.JPBonus = GetJPBonus();
+		SysLog.PrintInfo("OnPerformWinResult End");
 	}
 
 	public void OnPlayerRecordToDBServer() {
 		// 紀錄玩家輸贏到DB
+		SysLog.PrintInfo("OnPlayerRecordToDBServer Begin");
 		
+		SysLog.PrintInfo("OnPlayerRecordToDBServer End");	
 	}
 	
 	public int GeyPlayerCurrnetPoints(NettyClientChannel channel) {
 		SysLog.PrintInfo("GeyPlayerCurrnetPoints Begin");
-		// 得到使用者資料要從MEMBER_ID去得到GClonePlayer物件,
-		// 接著才能從這個物件去存取ACCOUNT_DATA
-		// Unit test
-//		account_data accountData = DataBaseReadDAO.findAccountData("A0001");
-//		SysLog.PrintInfo(accountData.getPoints().toString());
-//		SysLog.PrintInfo("GeyPlayerCurrnetPoints End");	
-//		int id = channel.get(ActorKeys.MEMBER_ID);
-//		GClonePlayer player = GetGClonePlayer(id);
-//		account_data adata = player.get(ActorKeys.ACCOUNT_DATA);
-//	    adata.setPoints(accountData.getPoints());
-//		return accountData.getPoints();
-		
 		// 正常流程
 		int id = channel.get(ActorKeys.MEMBER_ID);
 		GClonePlayer player = GetGClonePlayer(id);
@@ -132,7 +124,9 @@ public class Logic_CGGSLBet implements CommonLogic {
 	}
 	
 	public int GetJPBonus() {
+		SysLog.PrintInfo("GetJPBonus Begin");
 		CGJPBonus.JP_1 = CGJPBonus.JP_1 - responses_.GetJPBoints;
+		SysLog.PrintInfo("GetJPBonus End");
 		return CGJPBonus.JP_1;
 	}
 }

@@ -68,7 +68,7 @@ public class CGThisGroup {
 	// 各格子隨機賠率
 	public static int[] RandomPay_ = new int [12];
 	// 局狀態
-	public static int States_ = CGGruupStates.JOURNEYBAR_STATUS_WAIT_PLAY.GetValue();
+	public static int States_ = CGGroupStates.JOURNEYBAR_STATUS_WAIT_PLAY.GetValue();
 	
 	public void GetGroupHistoryFromRedis() {
 		// set HistoryRecord
@@ -78,9 +78,6 @@ public class CGThisGroup {
 		for(int i = 0; i < 7; i++) {
 			BounsHistoryRecord_[i] = ran.nextInt(3);
 			SampleHistoryRecord_[i] = ran.nextInt(26);
-			SysLog.PrintInfo(String.format("BounsHistoryRecord_[%d] = %d, SampleHistoryRecord_[%d] = %d",
-							 				i, BounsHistoryRecord_[i],
-							 				i, SampleHistoryRecord_[i]));
 		}
 		SysLog.PrintInfo("GetGroupHistoryFromRedis End");
 	}
@@ -92,11 +89,9 @@ public class CGThisGroup {
 		Random ran = new Random();
 		for(int i = 0; i < 3; i++) {
 			BounsTotalBet_[i] = ran.nextInt(1000);
-			SysLog.PrintInfo(String.format("BounsTotalBet_[%d]", i, BounsTotalBet_[i]));
 		}
 		for(int j = 0; j < 12; j++) {
 			SampleTotalBet_[j] = ran.nextInt(1000);
-			SysLog.PrintInfo(String.format("SampleTotalBet_[%d]", j, SampleTotalBet_[j]));
 		}
 		SysLog.PrintInfo("ReGetBounsAndSampleTotalBetValue End");
 	}
@@ -110,7 +105,6 @@ public class CGThisGroup {
 	      result.append(digits[ (b&0xf0) >> 4 ]);
 	      result.append(digits[ b&0x0f]);
 	    }
-	    SysLog.PrintInfo("ReGetBounsAndSampleTotalBetValue End");
 	    return result.toString();
 	}
 	
@@ -122,7 +116,6 @@ public class CGThisGroup {
 	    	MessageDigest sha = MessageDigest.getInstance("MD5");
 	    	byte[] result =  sha.digest(randomNum.getBytes());   	
 	    	String code = hexEncode(result);
-	    	SysLog.PrintInfo(String.format("InitThisGroupId = %s", code));
 	    	SysLog.PrintInfo("InitThisGroupId End");
 	    	return code;
 	    }
@@ -150,7 +143,6 @@ public class CGThisGroup {
 	}
 	
 	private void SetOdds(int begin_index, int base_odds, int add_odds) {
-		SysLog.PrintInfo("SetOdds Begin");
 		int j, k;
 		for(j = begin_index; j < begin_index + 3; j++)
 		{
@@ -164,8 +156,6 @@ public class CGThisGroup {
 				continue;
 			
 			RandomPay_[j] = k;
-			SysLog.PrintInfo(String.format("SetOdds[%d] = %d", j, k));
 		}
-		SysLog.PrintInfo("SetOdds End");
 	}
 }

@@ -1,6 +1,6 @@
 package com.jinglei.game.server.common;
 
-public enum CGGruupStates {
+public enum CGGroupStates {
     JOURNEYBAR_STATUS_WAIT_PLAY(0),		//等待入局
     JOURNEYBAR_STATUS_BET_TIME(1),		//開始下注
     JOURNEYBAR_STATUS_RESULT(2),		//結算成績
@@ -8,7 +8,7 @@ public enum CGGruupStates {
     
     private int value_;
 
-    private CGGruupStates(int value) {
+    private CGGroupStates(int value) {
         this.value_ = value;
     }
 
