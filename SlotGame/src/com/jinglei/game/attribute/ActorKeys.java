@@ -22,5 +22,7 @@ public class ActorKeys {
 	public static final String USER_LONGITUDE = "USER_LONGITUD";		
 	
 	public static final String ThisGroupID = "ThisGroupID";
+	
+	public static final String BASE_PROBABILITY = "BASE_PROBABILITY";
 
 }

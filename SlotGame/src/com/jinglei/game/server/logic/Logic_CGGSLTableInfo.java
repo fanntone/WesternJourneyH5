@@ -73,24 +73,24 @@ public class Logic_CGGSLTableInfo implements CommonLogic {
 	}
 	
 	private void SetResponsesData() {
-		this.responses_.RunGrpBeginTime_ = CGThisGroup.RunGrpBeginTime_;
-		this.responses_.RunGrpEndTime_ = CGThisGroup.RunGrpEndTime_;
-		this.responses_.ThisGrpNo_ = CGThisGroup.ThisGrpNo_;
-		this.responses_.GrpType_= CGThisGroup.GrpType_;
-		this.responses_.CoinType_ = CGThisGroup.CoinType_;
-		this.responses_.GameType_ = CGThisGroup.GameType_;
-		this.responses_.BetRange_ = CGThisGroup.BetRange_;
-		this.responses_.MaxBetLimit_= CGThisGroup.MaxBetLimit_;	
-		this.responses_.GrpUniID_ = CGThisGroup.GrpUniID_;
-		this.responses_.JPBonusList_ = CGThisGroup.JPBonusList_;
-		this.responses_.BounsHistoryRecord_ = CGThisGroup.BounsHistoryRecord_;
-		this.responses_.SampleHistoryRecord_= CGThisGroup.SampleHistoryRecord_;
-		this.responses_.BounsTotalBet_ = CGThisGroup.BounsTotalBet_;
-		this.responses_.SampleTotalBet_ = CGThisGroup.SampleTotalBet_;
-		this.responses_.RandomPay_ = CGThisGroup.RandomPay_;
-		this.responses_.NationCoinType_= CGThisGroup.NationCoinType_;
-		this.responses_.MaxBetValue_ = CGThisGroup.MaxBetValue_;
-		this.responses_.MinBetValue_= CGThisGroup.MinBetValue_;	
+		this.responses_.RunGrpBeginTime = CGThisGroup.RunGrpBeginTime_;
+		this.responses_.RunGrpEndTime = CGThisGroup.RunGrpEndTime_;
+		this.responses_.ThisGrpNo = CGThisGroup.ThisGrpNo_;
+		this.responses_.GrpType= CGThisGroup.GrpType_;
+		this.responses_.CoinType = CGThisGroup.CoinType_;
+		this.responses_.GameType = CGThisGroup.GameType_;
+		this.responses_.BetRange = CGThisGroup.BetRange_;
+		this.responses_.MaxBetLimit= CGThisGroup.MaxBetLimit_;	
+		this.responses_.GrpUniID = CGThisGroup.GrpUniID_;
+		this.responses_.JPBonusList = CGThisGroup.JPBonusList_;
+		this.responses_.BounsHistoryRecord = CGThisGroup.BounsHistoryRecord_;
+		this.responses_.SampleHistoryRecord= CGThisGroup.SampleHistoryRecord_;
+		this.responses_.BounsTotalBet = CGThisGroup.BounsTotalBet_;
+		this.responses_.SampleTotalBet = CGThisGroup.SampleTotalBet_;
+		this.responses_.RandomPay = CGThisGroup.RandomPay_;
+		this.responses_.NationCoinType= CGThisGroup.NationCoinType_;
+		this.responses_.MaxBetValue = CGThisGroup.MaxBetValue_;
+		this.responses_.MinBetValue= CGThisGroup.MinBetValue_;	
 	}
 	
 }

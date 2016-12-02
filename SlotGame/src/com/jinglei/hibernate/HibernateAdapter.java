@@ -19,6 +19,8 @@ public class HibernateAdapter {
 	private volatile Configuration 	configuration			= null;
     private volatile SessionFactory sessionFactory 			= null;
     private volatile String confPath ="hibernate.cfg.xml";
+    private volatile StandardServiceRegistryBuilder builder = null;
+
     /*
      * @note ConcurrentHashMap 是一個執行緒安全的 Hash Table ，它的主要功能是提供了一組和HashTable功能相同
 	 *   	        但是執行緒安全的方法。
@@ -33,7 +35,7 @@ public class HibernateAdapter {
 	    	configuration = new Configuration().configure(confPath);
 	        
 	        if ( configuration != null ) {	   
-	        	new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+	        	builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
 	        	this.sessionFactory = configuration.buildSessionFactory();
 	        }
 	        else {
@@ -54,7 +56,7 @@ public class HibernateAdapter {
 		    	configuration = new Configuration().configure(confPath);
 		        
 		        if ( configuration != null ) {	   
-		        	new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+		        	builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
 		        	this.sessionFactory = configuration.buildSessionFactory();
 		        }
 		        else {
@@ -102,12 +104,13 @@ public class HibernateAdapter {
     //@brief synchronized 同步鎖
     public synchronized void reconnect() throws HibernateException {
     	this.configuration 	= null;
+    	this.builder 		= null;
     	this.sessionFactory = null;
     	
     	this.configuration = new Configuration().configure(confPath);
     	
         if ( this.configuration != null ) {	   
-        	new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+        	this.builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
         	this.sessionFactory = configuration.buildSessionFactory();
         }
         else {

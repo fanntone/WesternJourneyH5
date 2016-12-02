@@ -32,8 +32,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  *      CacheConcurrencyStrategy.NONSTRICT_READ_WRITE ，不嚴格的讀寫模式則不會的緩存數據加鎖；
  *      CacheConcurrencyStrategy.TRANSACTIONAL ，事務模式指緩存支持事務，當事務回滾時，緩存也能回滾，只支持 JTA 環境。
  *
- * SQL data type 		Java data type
- *						Simply mappable 		Object mappable
+ * SQL data type 			Java data type
+ *						Simply mappable 	Object mappable
  *	CHARACTER 	  									String
  *	VARCHAR 	  									String
  *	LONGVARCHAR 	  								String
@@ -55,17 +55,17 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  *	TIMESTAMP 	  								java.sql.Timestamp
  *
  *
- *	幣別代碼	幣別縮寫	幣別名稱
- *	-1		NON		沒有幣值
- *	116	 	KHR		高棉
- *  156	 	CNY		中華人民共和國
- * 	360	 	IDR		印尼
- *	458	 	MYR		馬來西亞
- *	702	 	SGD		新加坡
- *	704	 	VND		越南
- *	764	 	THB		泰國
- *	840	 	USD		美國
- *	999	 	DEM		展示
+ *			幣別代碼	幣別縮寫	幣別名稱
+ *			 -1		 NON	沒有幣值
+ *			 116	 KHR	高棉
+ *      	 156	 CNY	中華人民共和國
+ * 			 360	 IDR	印尼
+ *			 458	 MYR	馬來西亞
+ *			 702	 SGD	新加坡
+ *			 704	 VND	越南
+ *			 764	 THB	泰國
+ *			 840	 USD	美國
+ *			 999	 DEM	展示
  */
 @Entity
 @Table(name = "member_points")

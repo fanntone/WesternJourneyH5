@@ -9,10 +9,11 @@ import com.jinglei.game.attribute.ActorKeys;
 import com.jinglei.game.attribute.impl.GClonePlayer;
 import com.jinglei.game.manage.ActorManage;
 import com.jinglei.game.server.common.CGJPBonus;
-import com.jinglei.game.server.common.CGJourneyBarProb;
+import com.jinglei.game.server.common.CGProbability;
 import com.jinglei.game.server.common.CGGruupStates;
 import com.jinglei.game.server.common.CGThisGroup;
 import com.jinglei.hibernate.read.account_data;
+import com.jinglei.hibernate.read.dao.DataBaseReadDAO;
 import com.jinglei.packets.ctos.CGGSLBet;
 import com.jinglei.packets.stoc.CGGCliResult;
 import com.jinglei.server.logic.CommonLogic;
@@ -48,7 +49,7 @@ public class Logic_CGGSLBet implements CommonLogic {
 	
 	public CGGSLBet receive_ = new CGGSLBet();
 	public CGGCliResult responses_ = new CGGCliResult();
-	CGJourneyBarProb prob_ = new CGJourneyBarProb();
+	CGProbability prob_ = new CGProbability();
 	
 	public void OnReceive(byte[] packet_data) {
 		String json_text = new String(packet_data,
@@ -67,8 +68,8 @@ public class Logic_CGGSLBet implements CommonLogic {
 	}
 	
 	public boolean OnPerformLogic(NettyClientChannel channel) {
-		if( CGThisGroup.States_ != CGGruupStates.JOURNEYBAR_STATUS_BET_TIME.GetValue())
-			return false;
+		//if( CGThisGroup.States_ != CGGruupStates.JOURNEYBAR_STATUS_BET_TIME.GetValue())
+		//	return true;
 		
 		OnPerformWinResult(channel);
 		OnPlayerRecordToDBServer();
@@ -82,25 +83,25 @@ public class Logic_CGGSLBet implements CommonLogic {
 	public void OnPerformWinResult(NettyClientChannel channel) {
 		// 計算賽局機率與開獎結果, 然後丟給各別玩家
 		// 沒中獎示範
-		responses_.BetResult_ = 0;
-		responses_.SampleSlotStopList_[0] = 0;
-		responses_.BonusSlotPoints_ = 0;	
-		responses_.BossSlotStopList_[0] = 0;
-		responses_.BossSlotStopList_[1] = 1; 
-		responses_.OpenStyle_ = 0;	
-		responses_.OpenStyleWinResult_ = 0;
+		responses_.BetResult = 0;
+		responses_.SampleSlotStopList[0] = 0;
+		responses_.BonusSlotPoints = 0;	
+		responses_.BossSlotStopList[0] = 0;
+		responses_.BossSlotStopList[1] = 1; 
+		responses_.OpenStyle = 0;	
+		responses_.OpenStyleWinResult = 0;
 		
-		responses_.SampleSlotWinPoints_ = 0;
-		responses_.BonusSlotPoints_ = 0;
-		responses_.GetJPBoints_ = 0;
-		responses_.PlayerTotalWinPoints_ = responses_.SampleSlotWinPoints_ +
-										   responses_.BonusSlotPoints_ +
-										   responses_.GetJPBoints_;
-		responses_.PlayerCurrentPoints_ = GeyPlayerCurrnetPoints(channel) +
-										  responses_.PlayerTotalWinPoints_ +
-										  responses_.GetJPBoints_;
+		responses_.SampleSlotWinPoints = 0;
+		responses_.BonusSlotPoints = 0;
+		responses_.GetJPBoints = 0;
+		responses_.PlayerTotalWinPoints = responses_.SampleSlotWinPoints +
+										  responses_.BonusSlotPoints +
+										  responses_.GetJPBoints;
+		responses_.PlayerCurrentPoints = GeyPlayerCurrnetPoints(channel) +
+										 responses_.PlayerTotalWinPoints +
+										 responses_.GetJPBoints;
 
-		responses_.JPBonus_ = GetJPBonus();
+		responses_.JPBonus = GetJPBonus();
 	}
 
 	public void OnPlayerRecordToDBServer() {
@@ -109,17 +110,22 @@ public class Logic_CGGSLBet implements CommonLogic {
 	}
 	
 	public int GeyPlayerCurrnetPoints(NettyClientChannel channel) {
+		SysLog.PrintInfo("GeyPlayerCurrnetPoints Begin");
 		// 得到使用者資料要從MEMBER_ID去得到GClonePlayer物件,
 		// 接著才能從這個物件去存取ACCOUNT_DATA
-		int id = channel.get(ActorKeys.MEMBER_ID);
-		GClonePlayer player = GetGClonePlayer(id);
-		account_data adata = player.get(ActorKeys.ACCOUNT_DATA);
-	    adata.setPoints(adata.getPoints());
-		return adata.getPoints();
+		account_data accountData = DataBaseReadDAO.findAccountData("A0001");
+		SysLog.PrintInfo(accountData.getPoints().toString());
+		SysLog.PrintInfo("GeyPlayerCurrnetPoints End");
+		
+//		int id = channel.get(ActorKeys.MEMBER_ID);
+//		GClonePlayer player = GetGClonePlayer(id);
+//		account_data adata = player.get(ActorKeys.ACCOUNT_DATA);
+//	    adata.setPoints(accountData.getPoints());
+		return accountData.getPoints();
 	}
 	
 	public int GetJPBonus() {
-		CGJPBonus.JP_1 = CGJPBonus.JP_1 - responses_.GetJPBoints_;
+		CGJPBonus.JP_1 = CGJPBonus.JP_1 - responses_.GetJPBoints;
 		return CGJPBonus.JP_1;
 	}
 }

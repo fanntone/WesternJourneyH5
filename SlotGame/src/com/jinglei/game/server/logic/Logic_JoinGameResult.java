@@ -5,13 +5,17 @@ import java.nio.charset.StandardCharsets;
 import com.alibaba.fastjson.JSON;
 import com.jinglei.channel.NettyClientChannel;
 import com.jinglei.game.SysLog;
-
+import com.jinglei.game.attribute.ActorKeys;
+import com.jinglei.game.attribute.impl.GClonePlayer;
+import com.jinglei.game.manage.ActorManage;
 import com.jinglei.game.manage.UtilTimeManage;
-import com.jinglei.game.service.Service;
-import com.jinglei.game.service.ServiceExecuteEnum;
-import com.jinglei.game.service.ServiceKeys;
-import com.jinglei.game.service.ServiceManage;
+import com.jinglei.game.probability.GBaseProbability;
+import com.jinglei.game.server.common.StatusCode;
+
+import com.jinglei.hibernate.read.account_data;
+import com.jinglei.hibernate.read.dao.DataBaseReadDAO;
 import com.jinglei.packets.ctos.JoinGame;
+import com.jinglei.packets.stoc.JoinGameResult;
 import com.jinglei.server.logic.CommonLogic;
 
 
@@ -60,30 +64,140 @@ public class Logic_JoinGameResult implements CommonLogic {
 		super();
 	}
 	
+//	@Override
+//	public void executeLogic(byte[] packet_data, NettyClientChannel channel) {
+//		try {
+//			SysLog.PrintError(String.format("[Logic:%s]  Run Date:%d  Channel HashCode:%d Runing Begin...!!!", getLogicName(),UtilTimeManage.getCurrentTimeToNumber(),channel.getHashCode()));
+//			
+//			if ( packet_data != null && channel != null ) {
+//				
+//				boolean[] check_bool = { false };
+//				int[]     check_code = { 0 };
+//				
+//				String json_text = new String(packet_data, StandardCharsets.UTF_8);
+//				
+//				JoinGame receive = JSON.parseObject(json_text, JoinGame.class);
+//				if ( receive != null && channel != null) {					
+//					Task exeTask = TaskManage.getTaskObjectByType(TaskExecuteEnum.TEE_JoinGame.getType(),check_code);
+//					if ( check_code[0] >= 1 && exeTask != null) {
+//						/*
+//						 *  channel.hashCode() -> 所產生 hashCode() 在編碼上有可能會沖撞
+//						 *  要使用  getHashCode
+//						 */
+//						SysLog.PrintError(String.format("[Logic:%s]  Check Hash Code:%d",getLogicName(),channel.hashCode()));
+//						exeTask.put(TaskKeys.CHANNEL_HASH_CODE, channel.getHashCode());
+//						exeTask.put(TaskKeys.JSON_STRINGS, json_text);
+//						TaskManage.addTask(exeTask);
+//					}				
+//				}
+//			}			
+//		}
+//		catch (Exception e) {
+//		
+//		}
+//		finally	{
+//			SysLog.PrintError(String.format("[Logic:%s]  Run Date:%d  Runing Endded...!!!", getLogicName(),UtilTimeManage.getCurrentTimeToNumber()));	
+//		}
+//
+//	}
+	
 	@Override
 	public void executeLogic(byte[] packet_data, NettyClientChannel channel) {
 		try {
 			SysLog.PrintError(String.format("[Logic:%s]  Run Date:%d  Channel HashCode:%d Runing Begin...!!!", getLogicName(),UtilTimeManage.getCurrentTimeToNumber(),channel.getHashCode()));
 			
 			if ( packet_data != null && channel != null ) {
-				int[]     check_code = { 0 };
 				
-				String json_text = new String(packet_data, StandardCharsets.UTF_8);			
-				JoinGame receive = JSON.parseObject(json_text, JoinGame.class);
-				if ( receive != null && channel != null) {					
-					Service exeService = ServiceManage.getServiceObjectByType(ServiceExecuteEnum.SEE_JoinGame.getType(),check_code);
-					if ( check_code[0] >= 1 && exeService != null) {
+				String 			json_text 	= null;
+				JoinGame 		receive	    = null;
+				account_data 	accountData = null;
+				
+				GClonePlayer 	player 		= null;
+				/*
+				 *  _LOGIC_ERROR_ Begin
+				 */
+				_LOGIC_ERROR_: {	
+					json_text = new String(packet_data, StandardCharsets.UTF_8);				
+					
+					receive =  JSON.parseObject(json_text, JoinGame.class);
+					
+					if ( receive == null || 
+						 receive.getAccount().isEmpty() || receive.getAccount().equals("")) {
+						SysLog.PrintError(String.format("[Logic:%s] JoinGame Parse Object is NULL....Failure!!",getLogicName()));
+						break _LOGIC_ERROR_;
+					}
+					
+					DataBaseReadDAO.getInstance();
+//					accountData = DataBaseReadDAO.findAccountData(receive.getAccount());
+					if ( accountData == null ) {
+						SysLog.PrintError(String.format("[Logic:%s] MySQL get account is NULL....Failure!!",getLogicName()));
+						break _LOGIC_ERROR_;
+					}
+					
+					player = ActorManage.GetClonePlayer(accountData.getMemberID());
+					
+					if ( player == null ) {
+						player = new GClonePlayer(channel,accountData.getMemberID());						
+					}
+					else {
+						player.setMemberID(accountData.getMemberID());						
+					}
+					
+					/*
+					 * 取  Redis 資料
+					 */
+//					GBaseProbability   baseProbability = player.get(ActorKeys.BASE_PROBABILITY);
+//					
+//					if ( baseProbability == null ) { 
+//						baseProbability = new GBaseProbability();
+//						baseProbability.setAccountData(accountData);
+//						player.put(ActorKeys.BASE_PROBABILITY, baseProbability);
+//					}		
+					
+					player.put(ActorKeys.ACCOUNT_DATA, accountData);
+					
+					channel.put(ActorKeys.MEMBER_ID,new Integer(accountData.getMemberID()));
+					
+					ActorManage.addChannel(channel);					
+					ActorManage.AddClonePlayer(accountData.getMemberID(),player);					
+					ActorManage.AddOnlinePlayer(String.format("%s:%s", accountData.getAccount(),accountData.getPassWord()),accountData.getMemberID());
+					
+					JoinGameResult responses = new JoinGameResult(accountData);
+					
+					if ( responses != null && responses.getStateCode() >= 1) {						
 						/*
-						 *  channel.hashCode() -> 所產生 hashCode() 在編碼上有可能會沖撞
-						 *  要使用  getHashCode
-						 */
-						SysLog.PrintError(String.format("[Logic:%s]  Check Hash Code:%d",getLogicName(),channel.hashCode()));
-						exeService.put(ServiceKeys.CHANNEL_HASH_CODE, channel.getHashCode());
-						exeService.put(ServiceKeys.JSON_STRINGS, json_text);
-						ServiceManage.addService(exeService);
+						 * new com.alibaba.fastjson.serializer.PascalNameFilter()
+						 * 字首不會轉成小寫
+						 */	
+						//channel.writeJSON(JSON.toJSONString(responses, SerializerFeature.WriteClassName));
+						SysLog.PrintError(String.format("[Logic:%s] Execute:%s channel HashCode:[%s]!!",getLogicName(), "JoinGameResult",JSON.toJSONString(responses,new com.alibaba.fastjson.serializer.PascalNameFilter())));
+						SysLog.PrintError(String.format("[Logic:%s] Execute:%s WriteJSON:[%s]!!",getLogicName(), "JoinGameResult",JSON.toJSONString(responses,new com.alibaba.fastjson.serializer.PascalNameFilter())));
+						channel.writeJSON(JSON.toJSONString(responses,new com.alibaba.fastjson.serializer.PascalNameFilter()));
+						return ;
 					}				
 				}
-			}			
+				/*
+				 *  _LOGIC_ERROR_ Endded
+				 */
+				
+				/*
+				 * 更換狀態失敗
+				 */
+				JoinGameResult responses = new JoinGameResult();
+				
+				if ( responses != null && channel != null) {		
+					responses.setStateCode(StatusCode.Failure.getCode());
+					/*
+					 * new com.alibaba.fastjson.serializer.PascalNameFilter()
+					 * 字首不會轉成小寫
+					 */	
+					//channel.writeJSON(JSON.toJSONString(responses, SerializerFeature.WriteClassName));
+					SysLog.PrintError(String.format("[Logic:%s] Execute:%s WriteJSON:[%s]!!",getLogicName(), "JoinGameResult",JSON.toJSONString(responses,new com.alibaba.fastjson.serializer.PascalNameFilter())));
+					channel.writeJSON(JSON.toJSONString(responses,new com.alibaba.fastjson.serializer.PascalNameFilter()));					
+				}
+			}	
+			
+			return;
 		}
 		catch (Exception e) {
 		

@@ -6,6 +6,8 @@ import java.util.Map.Entry;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import org.hibernate.Session;
 
@@ -24,6 +26,8 @@ public class HibernateManagement {
 	 * Hibernate Mangement Instance
 	 */
 	private static HibernateManagement   instance = null;
+	
+	private static ScheduledExecutorService scheduler =  Executors.newScheduledThreadPool(2);
 	
 	/*
 	 *   HashMap<String, HibernateAdapter>    key->資料庫名稱    HibernateAdapter->OR-M 
@@ -138,12 +142,13 @@ public class HibernateManagement {
 				 * 先判斷連線是右存在
 				 * isConnected == true 連線中  就將 Session 
 				 */
-				if (HibernateManagement.mapAdapter.get(db_name).getSession().isConnected() ) {
-					return HibernateManagement.mapAdapter.get(db_name).getSession();
-				}
+//				if (HibernateManagement.mapAdapter.get(db_name).getSession().isConnected() ) {
+//					return HibernateManagement.mapAdapter.get(db_name).getSession();
+//				}
 
 				/*
 				 * 未連線 中 重新連線
+				 * 每次都重連 重取
 				 */
 				if (HibernateManagement.reConnect(db_name)) {
 					return HibernateManagement.mapAdapter.get(db_name).getSession();				

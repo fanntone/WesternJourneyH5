@@ -28,24 +28,24 @@ public class CGGCliTableInfo implements JSONBean {
 
 	}
 	
-	public long RunGrpBeginTime_ = 0 ;
-	public long RunGrpEndTime_ = 0;
-	public String ThisGrpNo_ = null;
-	public int GrpType_ = 0;
-	public int CoinType_ = 0;
-	public int GameType_ = 0;
-	public int[] BetRange_ = new int[5];
-	public int MaxBetLimit_ = 0;
-	public String GrpUniID_ = null;
-	public int[] JPBonusList_ = new int[4];
-	public int[] BounsHistoryRecord_ = new int[8];
-	public int[] SampleHistoryRecord_ = new int[8];
-	public int[] BounsTotalBet_ = new int[3];
-	public int[] SampleTotalBet_ = new int[12];	
-	public int[] RandomPay_ = new int[12];
-	public int NationCoinType_ = 0;
-	public int NationPointRatio_ = 0;
-	public int MaxBetValue_ = 0;
-	public int MinBetValue_ = 0;
+	public long RunGrpBeginTime = 0 ;
+	public long RunGrpEndTime = 0;
+	public String ThisGrpNo = null;
+	public int GrpType = 0;
+	public int CoinType = 0;
+	public int GameType = 0;
+	public int[] BetRange = new int[5];
+	public int MaxBetLimit = 0;
+	public String GrpUniID = null;
+	public int[] JPBonusList = new int[4];
+	public int[] BounsHistoryRecord = new int[8];
+	public int[] SampleHistoryRecord = new int[8];
+	public int[] BounsTotalBet = new int[3];
+	public int[] SampleTotalBet = new int[12];	
+	public int[] RandomPay = new int[12];
+	public int NationCoinType = 0;
+	public int NationPointRatio = 0;
+	public int MaxBetValue = 0;
+	public int MinBetValue = 0;
 	
 }
