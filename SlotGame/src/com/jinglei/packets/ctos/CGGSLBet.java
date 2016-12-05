@@ -21,7 +21,7 @@ public class CGGSLBet implements JSONBean {
 //															//3:沙悟淨-紅,  4:沙悟淨-綠,  5:沙悟淨-黃 
 //															//6:牛魔王-紅,  7:牛魔王-綠,  8:牛魔王-黃
 //															//9:紅孩兒-紅, 10:紅孩兒-綠, 11:紅孩兒-黃 )
-//		int             BounsBetSum[3];						//1.人, 2.鬼, 3.神
+//		int             BounsBetSum[3];						//0:人, 1:神, 2:鬼
 //		int				iTotalBetPoint;						//押注總金額
 //	};
 	

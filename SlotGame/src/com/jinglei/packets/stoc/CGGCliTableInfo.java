@@ -28,10 +28,10 @@ public class CGGCliTableInfo implements JSONBean {
 
 	}
 	
-	public long RunGrpBeginTime = 0 ;
-	public long RunGrpEndTime = 0;
-	public String ThisGrpNo = null;
-	public int GrpType = 0;
+	public long RunGrpBeginTime = 0 ;				// 局開始時間
+	public long RunGrpEndTime = 0;					// 局結束時間
+	public String ThisGrpNo = null;					// 局編號(唯一碼, DB用)
+	public int GrpType = 0;							// 局類型
 	public int CoinType = 0;
 	public int GameType = 0;
 	public int[] BetRange = new int[5];
